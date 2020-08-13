@@ -14,5 +14,12 @@
 */
 
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+   // return $router->app->version();
+    echo "<b style='font-family:calibri'>API Server</b>";
 });
+
+$router->get(env("ADMIN_URL").'/settings', function () use ($router) {
+    $results = app('db')->select("SELECT * FROM pt_app_settings");
+    return $results;
+});
+
