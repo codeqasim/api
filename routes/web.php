@@ -19,7 +19,7 @@ $router->get('/', function () use ($router) {
 });
 
 $router->get(env("ADMIN_URL").'/settings', function () use ($router) {
-    $results = app('db')->select("SELECT * FROM pt_app_settings");
+    $results = app('db')->select("SELECT * FROM app_settings");
     return $results;
 });
 
