@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
+use App\Modules;
 class AdminController extends Controller
 {
     /**
@@ -270,8 +271,94 @@ class AdminController extends Controller
     }
 
             //show all record
-        public function mudules()
+        public function modules()
     {
-        return User::get();
+        return Modules::get();
+    }
+
+            //show only one record using id
+        public function modules_view(Request $request) {
+        $modules_id = Modules::find($request->id);
+        if (empty($modules_id)) {
+           return "No data found.";
+        }
+        return $modules_id;
+    }
+
+        public function modules_create(Request $request) {
+        $this->validate($request, [
+        // 'name' => 'required|min:3|max:12',
+        // 'email' => "required"|email|unique:users',
+        "parent_id"=> "required",
+        "name"=> "required",
+        "status"=> "required",
+        "order"=> "required",
+        "markup"=> "required",
+        "c1"=> "required",
+        "c2"=> "required",
+        "c3"=> "required",
+        "c4"=> "required",
+        "c5"=> "required",
+        "c6"=> "required"
+        ]);
+        return Modules::create([
+        "parent_id"=>request('parent_id'),
+        "name"=>request('name'),
+        "status"=>request('status'),
+        "order"=>request('order'),
+        "markup"=>request('markup'),
+        "c1"=>request('c1'),
+        "c2"=>request('c2'),
+        "c3"=>request('c3'),
+        "c4"=>request('c4'),
+        "c5"=>request('c5'),
+        "c6"=>request('c6')
+        ]);
+    }
+        public function modules_delete(Request $request) {
+        $modules_id = Modules::find($request->id);
+        if (!empty($modules_id)) {
+           $modules_id->delete();
+           return response()->json(['deleted' => 'true','status'=>'200']);
+        }
+        
+        return response()->json(['deleted' => $modules_id == 1,'status'=>'200']);
+    }
+
+        public function modules_update(Request $request) {
+        $this->validate($request, [
+        "parent_id"=> "required",
+        "name"=> "required",
+        "status"=> "required",
+        "order"=> "required",
+        "markup"=> "required",
+        "c1"=> "required",
+        "c2"=> "required",
+        "c3"=> "required",
+        "c4"=> "required",
+        "c5"=> "required",
+        "c6"=> "required"
+        ]);
+        // Find the data you want to update
+        $modules_id = Modules::find($request->id);
+        // Return error if not found
+        if (empty($modules_id)) {
+            return response()->json(['updated' => $modules_id == 1,'status'=>'200']);
+        }
+        // Update the user
+         Modules::where('id', $modules_id->id)->update([
+        "parent_id"=>request('parent_id'),
+        "name"=>request('name'),
+        "status"=>request('status'),
+        "order"=>request('order'),
+        "markup"=>request('markup'),
+        "c1"=>request('c1'),
+        "c2"=>request('c2'),
+        "c3"=>request('c3'),
+        "c4"=>request('c4'),
+        "c5"=>request('c5'),
+        "c6"=>request('c6')
+        ]);
+        return response()->json(['updated' => 'true','status'=>'200']);
     }
 }

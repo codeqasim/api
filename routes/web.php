@@ -22,7 +22,7 @@ $router->get('/', function () use ($router) {
 $router->group(['middleware'=>'auth'], function ($router) {
 $router->post(env("ADMIN_URL").'/settings',
 	'AdminController@settings');
-$router->get(env("ADMIN_URL").'/settings/view/{id}',
+$router->post(env("ADMIN_URL").'/settings/view/{id}',
 	'AdminController@settings_view');
 $router->post(env("ADMIN_URL").'/settings/create',
 	'AdminController@settings_create');
@@ -35,15 +35,15 @@ $router->post(env("ADMIN_URL").'/settings/update/{id}',
 
 //post
 $router->group(['middleware'=>'auth'], function ($router) {
-$router->post(env("ADMIN_URL").'/mudules',
-	'AdminController@mudules');
-$router->get(env("ADMIN_URL").'/mudules/view/{id}',
-	'AdminController@mudules_view');
-$router->post(env("ADMIN_URL").'/mudules/create',
-	'AdminController@mudules_create');
-$router->delete(env("ADMIN_URL").'/mudules/del/{id}',
-	'AdminController@mudules_delete');
-$router->post(env("ADMIN_URL").'/mudules/update/{id}',
-	'AdminController@mudules_update');
+$router->post(env("ADMIN_URL").'/modules',
+	'AdminController@modules');
+$router->post(env("ADMIN_URL").'/modules/view/{id}',
+	'AdminController@modules_view');
+$router->post(env("ADMIN_URL").'/modules/create',
+	'AdminController@modules_create');
+$router->delete(env("ADMIN_URL").'/modules/del/{id}',
+	'AdminController@modules_delete');
+$router->post(env("ADMIN_URL").'/modules/update/{id}',
+	'AdminController@modules_update');
 });
 
