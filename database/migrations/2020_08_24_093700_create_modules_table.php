@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAppmodulesTable extends Migration
+class CreateModulesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateAppmodulesTable extends Migration
      */
     public function up()
     {
-        Schema::create('appmodules', function (Blueprint $table) {
+        Schema::create('modules', function (Blueprint $table) {
             $table->id();
             $table->enum('parent_id', ['hotels', 'flights','tours','cars','visa','reviews','extra','rental']);
             $table->string('name');             
@@ -37,6 +37,6 @@ class CreateAppmodulesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('appmodules');
+        Schema::dropIfExists('modules');
     }
 }

@@ -3,9 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-class App_settings extends Model
+class Settings extends Model
 {
-    public $table = "appsettings";
+    public $table = "settings";
     /**
      * The attributes that are mass assignable.
      *

@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class App_modules extends Model
+class Modules extends Model
 {
-public $table = "appmodules";
+public $table = "modules";
 protected $fillable = [
 		"parent_id",
 		"name",
