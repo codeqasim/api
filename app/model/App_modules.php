@@ -1,12 +1,12 @@
 <?php
 
-namespace App;
+namespace App\model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Modules extends Model
+class App_modules extends Model
 {
-public $table = "app_modules";
+public $table = "appmodules";
 protected $fillable = [
 		"parent_id",
 		"name",

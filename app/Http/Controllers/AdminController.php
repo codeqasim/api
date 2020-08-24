@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-use App\User;
-use App\Modules;
+use App\model\App_settings;
+use App\model\App_modules;
 class AdminController extends Controller
 {
     /**
@@ -18,11 +18,11 @@ class AdminController extends Controller
         //show all record
         public function settings()
     {
-        return User::get();
+        return App_settings::get();
     }
         //show only one record using id
         public function settings_view(Request $request) {
-        $settings_id = User::find($request->id);
+        $settings_id = App_settings::find($request->id);
         if (empty($settings_id)) {
            return "No data found.";
         }
@@ -86,7 +86,7 @@ class AdminController extends Controller
         "restrict_website"=> "required",
         "mobile_redirect_url"=> "required"
         ]);
-        return User::create([
+        return App_settings::create([
         'site_title'=>request('site_title'),
         'home_title'=>request('home_title'),
         'site_url'=>request('site_url'),
@@ -142,7 +142,7 @@ class AdminController extends Controller
         ]);
     }
         public function delete(Request $request) {
-        $settings_id = User::find($request->id);
+        $settings_id = App_settings::find($request->id);
         if (!empty($settings_id)) {
            $settings_id->delete();
            return response()->json(['deleted' => 'true','status'=>'200']);
@@ -207,13 +207,13 @@ class AdminController extends Controller
         "mobile_redirect_url"=> "required"
         ]);
         // Find the data you want to update
-        $settings_id = User::find($request->id);
+        $settings_id = App_settings::find($request->id);
         // Return error if not found
         if (empty($settings_id)) {
             return response()->json(['updated' => $settings_id == 1,'status'=>'200']);
         }
-        // Update the user
-         User::where('id', $settings_id->id)->update([
+        // Update the App_settings
+         App_settings::where('id', $settings_id->id)->update([
         'site_title'=>request('site_title'),
         'home_title'=>request('home_title'),
         'site_url'=>request('site_url'),
@@ -268,17 +268,17 @@ class AdminController extends Controller
         'mobile_redirect_url'=>request('mobile_redirect_url')
         ]);
         return response()->json(['updated' => 'true','status'=>'200']);
-    }
+    } 
 
             //show all record
         public function modules()
     {
-        return Modules::get();
+        return App_modules::get();
     }
 
             //show only one record using id
         public function modules_view(Request $request) {
-        $modules_id = Modules::find($request->id);
+        $modules_id = App_modules::find($request->id);
         if (empty($modules_id)) {
            return "No data found.";
         }
@@ -301,7 +301,7 @@ class AdminController extends Controller
         "c5"=> "required",
         "c6"=> "required"
         ]);
-        return Modules::create([
+        return App_modules::create([
         "parent_id"=>request('parent_id'),
         "name"=>request('name'),
         "status"=>request('status'),
@@ -316,7 +316,7 @@ class AdminController extends Controller
         ]);
     }
         public function modules_delete(Request $request) {
-        $modules_id = Modules::find($request->id);
+        $modules_id = App_modules::find($request->id);
         if (!empty($modules_id)) {
            $modules_id->delete();
            return response()->json(['deleted' => 'true','status'=>'200']);
@@ -340,13 +340,13 @@ class AdminController extends Controller
         "c6"=> "required"
         ]);
         // Find the data you want to update
-        $modules_id = Modules::find($request->id);
+        $modules_id = App_modules::find($request->id);
         // Return error if not found
         if (empty($modules_id)) {
             return response()->json(['updated' => $modules_id == 1,'status'=>'200']);
         }
-        // Update the user
-         Modules::where('id', $modules_id->id)->update([
+        // Update the App_settings
+         App_modules::where('id', $modules_id->id)->update([
         "parent_id"=>request('parent_id'),
         "name"=>request('name'),
         "status"=>request('status'),

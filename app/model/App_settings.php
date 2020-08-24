@@ -1,24 +1,17 @@
 <?php
 
-namespace App;
+namespace App\model;
 
-use Illuminate\Auth\Authenticatable;
-use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Model;
-use Laravel\Lumen\Auth\Authorizable;
-
-class User extends Model implements AuthenticatableContract, AuthorizableContract
+class App_settings extends Model
 {
-    use Authenticatable, Authorizable;
-    public $table = "app_settings";
+    public $table = "appsettings";
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        "user",
         "site_title",
         "home_title",
         "site_url",
