@@ -32,7 +32,7 @@ class AuthServiceProvider extends ServiceProvider
 
         $this->app['auth']->viaRequest('api', function ($request) {
 
-            $header = $request->header('api-token');
+            $header = $request->header('token');
             if ($header && $header == env("ADMIN_KEY")) {
                 return new user();
             }
