@@ -47,3 +47,33 @@ $router->post(env("ADMIN_URL").'/modules/update/{id}',
 	'AdminController@modules_update');
 });
 
+//admin_accounts route
+$router->group(['middleware'=>'auth'], function ($router) {
+$router->post(env("ADMIN_URL").'/accounts',
+	'admin_accountsController@view');
+});
+
+//accounts_b2b route
+$router->group(['middleware'=>'auth'], function ($router) {
+$router->post(env("ADMIN_URL").'/accounts_b2b',
+	'Accounts_b2bController@view');
+});
+
+//accounts_b2c route
+$router->group(['middleware'=>'auth'], function ($router) {
+$router->post(env("ADMIN_URL").'/accounts_b2c',
+	'Accounts_b2cController@view');
+});
+
+//accounts_b2e route
+$router->group(['middleware'=>'auth'], function ($router) {
+$router->post(env("ADMIN_URL").'/accounts_b2e',
+	'Accounts_b2eController@view');
+});
+
+//countries route
+$router->group(['middleware'=>'auth'], function ($router) {
+$router->post(env("ADMIN_URL").'/countries',
+	'CountriesController@view');
+});
+
