@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\User;
+use App\model\Settings;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
@@ -34,7 +34,7 @@ class AuthServiceProvider extends ServiceProvider
 
             $header = $request->header('token');
             if ($header && $header == env("ADMIN_KEY")) {
-                return new user();
+                return new Settings();
             }
             return null;
             // if ($request->input('api_token')) {
