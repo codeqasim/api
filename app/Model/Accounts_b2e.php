@@ -13,7 +13,12 @@ class Accounts_b2e extends Model
     ];
 
       public static function all_accounts_b2e(){
-        return Accounts_b2e::get();
+        $data =  Accounts_b2e::get();
+        if (empty($data)) {
+        	return $data;
+        }else{
+        	return 'data not found!';
+        }
     }
 
 }
