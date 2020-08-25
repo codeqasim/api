@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-use App\Settings;
-use App\Modules;
+use App\model\Settings;
+use App\model\Modules;
 class AdminController extends Controller
 {
     /**
