@@ -36,7 +36,13 @@ $router->post(env("ADMIN_URL").'/modules/update/{id}',
 //admin_accounts route
 $router->group(['middleware'=>'auth'], function ($router) {
 $router->post(env("ADMIN_URL").'/accounts',
-	'admin_accountsController@view');
+	'Admin_accountsController@view');
+$router->post(env("ADMIN_URL").'/accounts/add',
+	'Admin_accountsController@add');
+$router->delete(env("ADMIN_URL").'/accounts/del/{id}',
+	'Admin_accountsController@delete');
+$router->post(env("ADMIN_URL").'/accounts/update/{id}',
+	'Admin_accountsController@update');
 });
 
 //accounts_b2b route
@@ -67,6 +73,12 @@ $router->post(env("ADMIN_URL").'/accounts_b2c/update/{id}',
 $router->group(['middleware'=>'auth'], function ($router) {
 $router->post(env("ADMIN_URL").'/accounts_b2e',
 	'Accounts_b2eController@view');
+$router->post(env("ADMIN_URL").'/accounts_b2e/add',
+	'Accounts_b2eController@add');
+$router->delete(env("ADMIN_URL").'/accounts_b2e/del/{id}',
+	'Accounts_b2eController@delete');
+$router->post(env("ADMIN_URL").'/accounts_b2e/update/{id}',
+	'Accounts_b2eController@update');
 });
 
 //countries route
