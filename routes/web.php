@@ -86,7 +86,10 @@ $router->group(['middleware'=>'auth'], function ($router) {
 $router->post(env("ADMIN_URL").'/countries',
 	'CountriesController@view');
 });
- 
+
+$router->get('xcrud','XcrudController@index');
+
+
 
 
 $router->get('/mail',

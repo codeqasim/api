@@ -15,7 +15,10 @@ class Xcrud extends Controller
         //
     }
         //show all record
-    public function xcrud(){
+    public function index(){
+
+    echo "hello";
+    die;
 
     include('xcrud/xcrud.php');
     $xcrud = Xcrud::get_instance();
