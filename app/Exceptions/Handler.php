@@ -9,6 +9,7 @@ use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Error;
+use ErrorException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -24,6 +25,7 @@ class Handler extends ExceptionHandler
         ModelNotFoundException::class,
         ValidationException::class,
         Error::class,
+        // ErrorException::class,
         
     ];
 
@@ -61,6 +63,9 @@ class Handler extends ExceptionHandler
         }
         if ($exception instanceof Error) {
             return response()->json(['message'=>'Error', 'status'=>500]);
+        }
+        if ($exception instanceof ErrorException) {
+            return response()->json(['message'=>'ErrorException', 'status'=>500]);
         }
         return parent::render($request, $exception);
     }
