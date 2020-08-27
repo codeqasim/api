@@ -94,6 +94,12 @@ $router->post('/settings',
 	'Frontsettings@settings');
 });
 
+//Front modules route
+$router->group(['middleware'=>'auth'], function ($router) {
+$router->post('/modules',
+	'Frontmodules@modules');
+});
+
 
 
 //================================
