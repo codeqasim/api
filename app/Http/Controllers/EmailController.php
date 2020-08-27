@@ -2,8 +2,7 @@
  
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-// use App\Model\Accounts_b2b;
-
+use Mailgun\Mailgun;
 class EmailController extends Controller
 {
     /**
@@ -17,19 +16,15 @@ class EmailController extends Controller
     }
         //show all record
     public function email(){
-    
-    require 'vendor/autoload.php';
-    use Mailgun\Mailgun;
-    $mgClient = new Mailgun('8855a5c4691fbce13a7f68d1617960b7-acb0b40c-7835043a');
+    $mg = Mailgun::create('8855a5c4691fbce13a7f68d1617960b7-acb0b40c-7835043a');
     $domain = "mail.phptravels.com";
-    $result = $mgClient->sendMessage("$domain",
-        array('from'    => 'Mailgun Sandbox <postmaster@mail.phptravels.com>',
-              'to'      => 'Qasim Hussain <info@phptravels.com>',
-              'subject' => 'Hello Qasim Hussain',
-              'template'    => 'password_reset',
-              'h:X-Mailgun-Variables'    => '{"test": "test"}'
-          ));
-    echo " this is email function";
+    $mg->messages()->send($domain , [
+    'from' => 'postmaster@mail.phptravels.com',
+    'to' => 'info@phptravels.com',
+    'subject' => 'Hello Qasim Hussain!',
+    'text' => 'It is so simple to send a message.'
+    ]);
+    echo "email send successfully!";
     }
 }
 
