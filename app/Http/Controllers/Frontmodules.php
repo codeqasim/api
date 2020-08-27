@@ -17,6 +17,6 @@ class Frontmodules extends Controller
         //show all record
         public function modules()
     {
-        return Modules::get();
+        return Modules::get(['name','status','order']);
     }
 }
