@@ -2,10 +2,10 @@
 class Xcrud_config
 {
     // default connection
-    public static $dbname = 'world'; // Your database name
-    public static $dbuser = 'root'; // Your database username
-    public static $dbpass = 'root'; // // Your database password
-    public static $dbhost = '127.0.0.1:3300'; // Your database host, 'localhost' is default.
+    public static $dbname = 'app'; // Your database name
+    public static $dbuser = 'app'; // Your database username
+    public static $dbpass = 'app'; // // Your database password
+    public static $dbhost = '192.168.100.99'; // Your database host, 'localhost' is default.
     
     
     // theme and language

@@ -87,11 +87,19 @@ $router->post(env("ADMIN_URL").'/countries',
 	'CountriesController@view');
 });
 
-$router->get('xcrud','XcrudController@index');
+//==========Front==========
+//Front settings route
+$router->group(['middleware'=>'auth'], function ($router) {
+$router->post('/settings',
+	'Frontsettings@settings');
+});
 
 
 
-
+//================================
 $router->get('/mail',
 	'EmailController@email');
+
+$router->get('/crud',
+	'XcrudController@index');
 
