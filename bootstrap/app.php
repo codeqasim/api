@@ -23,9 +23,15 @@ $app = new Laravel\Lumen\Application(
     dirname(__DIR__)
 );
 
-// $app->withFacades();
+<<<<<<< HEAD
+$app->withFacades();
+=======
+ $app->withFacades();
+>>>>>>> 0ecf36ad0dc8b9888dbd39b77c6938f446de494a
 
 $app->withEloquent();
+
+$app->configure('swagger-lume');
 
 /*
 |--------------------------------------------------------------------------
@@ -92,6 +98,7 @@ $app->routeMiddleware([
 */
 
 // $app->register(App\Providers\AppServiceProvider::class);
+$app->register(\SwaggerLume\ServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);
 $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
