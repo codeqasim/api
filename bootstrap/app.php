@@ -1,6 +1,6 @@
 <?php
-
 require_once __DIR__.'/../vendor/autoload.php';
+
 
 (new Laravel\Lumen\Bootstrap\LoadEnvironmentVariables(
     dirname(__DIR__)
@@ -23,16 +23,10 @@ $app = new Laravel\Lumen\Application(
     dirname(__DIR__)
 );
 
-<<<<<<< HEAD
-$app->withFacades();
-=======
- $app->withFacades();
->>>>>>> 0ecf36ad0dc8b9888dbd39b77c6938f446de494a
+ // $app->withFacades();
 
 $app->withEloquent();
-
-$app->configure('swagger-lume');
-
+// $app->configure('swagger-lume');
 /*
 |--------------------------------------------------------------------------
 | Register Container Bindings
@@ -96,9 +90,9 @@ $app->routeMiddleware([
 | totally optional, so you are not required to uncomment this line.
 |
 */
-
+// $app->register(\SwaggerLume\ServiceProvider::class);
 // $app->register(App\Providers\AppServiceProvider::class);
-$app->register(\SwaggerLume\ServiceProvider::class);
+
 $app->register(App\Providers\AuthServiceProvider::class);
 $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
