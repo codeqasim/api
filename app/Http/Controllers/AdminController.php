@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Model\Settings;
 use App\Model\Modules;
-use DB;
 class AdminController extends Controller
 {
     /**
@@ -220,19 +219,9 @@ class AdminController extends Controller
 
             //show all record
         public function modules()
-        {
-        $modules_data = [];
-        $pmodules1 =  DB::table('modules')->get();
-        foreach ($pmodules1 as $key => $value) {
-        $pmodules2 =  DB::table('modules')->where('name',$value->name)->get();
-        foreach ($pmodules2 as $key2 => $value2) {
-       $obj = array($value2->name=>array('modules' => $pmodules2, 'data'=>DB::table('modules_integrations')->where('modules_id',$value2->id)->get()));
-        array_push($modules_data, $obj);
-    
-        }
+    {
+        return Modules::get();
     }
-        return $modules_data;
-}
 
             //show only one record using id
         public function modules_view(Request $request) {
