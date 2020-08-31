@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Model\Modules;
+use App\Model\Modules_integrations;
 class Frontmodules extends Controller
 {
     /**
@@ -17,6 +18,13 @@ class Frontmodules extends Controller
         //show all record
         public function modules()
     {
-        return Modules::get(['name','status','order']);
+        $modules_data = [];
+        $pmodules =  Modules::where('status',1)->get();
+        foreach ($pmodules as $key => $value) {
+         $obj = array($value->name => Modules_integrations::where('modules_id',$value->id)->get());
+            array_push($modules_data, $obj);
+        return $modules_data;
+        }
+       // return Modules::get(['name','status','order']);
     }
 }

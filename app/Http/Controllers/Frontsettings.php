@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Model\Settings;
+use App\Model\Modules;
+
 class Frontsettings extends Controller
 {
     /**
@@ -17,6 +19,6 @@ class Frontsettings extends Controller
         //show all record
         public function settings()
     {
-        return Settings::get();
+        return array("Settings" => Settings::get(),"Modules"=>Modules::where('status',1)->get());
     }
 }
