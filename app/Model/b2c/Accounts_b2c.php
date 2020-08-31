@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Model;
+namespace App\Model\b2c;
 use Illuminate\Database\Eloquent\Model;
 
-class Acounts_admins extends Model
+class Accounts_b2c extends Model
 {
 
-	public $table = "acounts_admins";
+	public $table = "accounts_b2c";
 	protected $fillable = [
 		"first_name",
 		"last_name",
@@ -28,12 +28,12 @@ class Acounts_admins extends Model
 		"commission"
     ];
 
-      public static function all_acounts_admins(){
-        return Acounts_admins::get();
+      public static function all_accounts_b2c(){
+        return Accounts_b2c::get();
     }
 
-     public static function add($request){
-         Acounts_admins::create([
+      public static function add($request){
+         Accounts_b2c::create([
     	"first_name"=>$request->first_name,
 		"last_name"=>$request->last_name,
 		"email"=>$request->email,
@@ -57,23 +57,23 @@ class Acounts_admins extends Model
     }
 
         public static function del($request) {
-        $Acounts_admins_id = Acounts_admins::find($request->id);
-        if (!empty($Acounts_admins_id)) {
-           $Acounts_admins_id->delete();
+        $Accounts_b2c_id = Accounts_b2c::find($request->id);
+        if (!empty($Accounts_b2c_id)) {
+           $Accounts_b2c_id->delete();
        return response()->json(['deleted' => 'true','status'=>'200']);
         }else{
-    	return response()->json(['deleted' => $Acounts_admins_id == 1,'status'=>'200']);
+    	return response()->json(['deleted' => $Accounts_b2c_id == 1,'status'=>'200']);
         }
     }
 
-      	public static function Acounts_admins_update($request){
-  		$Acounts_admins_id = Acounts_admins::find($request->id);
+      	public static function Accounts_b2c_update($request){
+  		$Accounts_b2c_id = Accounts_b2c::find($request->id);
   		// Return error if not found
-        if (empty($Acounts_admins_id)) {
-            return response()->json(['updated' => $Acounts_admins_id == 1,'status'=>'200']);
+        if (empty($Accounts_b2c_id)) {
+            return response()->json(['updated' => $Accounts_b2c_id == 1,'status'=>'200']);
         }
-        // Update the Acounts_admins
-         Acounts_admins::where('id', $Acounts_admins_id->id)->update([
+        // Update the Accounts_b2c
+         Accounts_b2c::where('id', $Accounts_b2c_id->id)->update([
     	"first_name"=>$request->first_name,
 		"last_name"=>$request->last_name,
 		"email"=>$request->email,

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Model;
+namespace App\Model\b2e;
 use Illuminate\Database\Eloquent\Model;
 
 class Accounts_b2e extends Model

@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\model\Settings;
+use App\model\admin\Settings;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 

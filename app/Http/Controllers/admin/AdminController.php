@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Model\Settings;
-use App\Model\Modules;
+use App\Model\admin\Settings;
+use App\Model\admin\Modules;
+use App\Model\admin\Modules_integrations;
 use DB;
 class AdminController extends Controller
 {
@@ -122,7 +124,7 @@ class AdminController extends Controller
         'default_theme'=>request('default_theme'),
         'offline_message'=>request('offline_message'),
         'site_offline'=>request('site_offline'),
-        'multi_curr'=>request('multi_curr'),
+        'multi_curr'=>request('multi_curr'), 
         'booking_expiry'=>request('booking_expiry'),
         'booking_cancellation'=>request('booking_cancellation'),
         'coupon_code_length'=>request('coupon_code_length'),
@@ -238,7 +240,7 @@ class AdminController extends Controller
         public function modules_view(Request $request) {
         $modules_id = Modules::find($request->id);
         if (empty($modules_id)) {
-           return "No data found.";
+        return response()->json(['message' => 'data Not found!','status'=>'200']);
         }
         return $modules_id;
     }
@@ -247,30 +249,14 @@ class AdminController extends Controller
         $this->validate($request, [
         // 'name' => 'required|min:3|max:12',
         // 'email' => "required"|email|unique:users',
-        "parent_id"=> "required",
         "name"=> "required",
         "status"=> "required",
-        "order"=> "required",
-        "markup"=> "required",
-        "c1"=> "required",
-        "c2"=> "required",
-        "c3"=> "required",
-        "c4"=> "required",
-        "c5"=> "required",
-        "c6"=> "required"
+        "order"=> "required"
         ]);
         return Modules::create([
-        "parent_id"=>request('parent_id'),
         "name"=>request('name'),
         "status"=>request('status'),
-        "order"=>request('order'),
-        "markup"=>request('markup'),
-        "c1"=>request('c1'),
-        "c2"=>request('c2'),
-        "c3"=>request('c3'),
-        "c4"=>request('c4'),
-        "c5"=>request('c5'),
-        "c6"=>request('c6')
+        "order"=>request('order')
         ]);
     }
         public function modules_delete(Request $request) {
@@ -285,17 +271,9 @@ class AdminController extends Controller
 
         public function modules_update(Request $request) {
         $this->validate($request, [
-        "parent_id"=> "required",
         "name"=> "required",
         "status"=> "required",
         "order"=> "required",
-        "markup"=> "required",
-        "c1"=> "required",
-        "c2"=> "required",
-        "c3"=> "required",
-        "c4"=> "required",
-        "c5"=> "required",
-        "c6"=> "required"
         ]);
         // Find the data you want to update
         $modules_id = Modules::find($request->id);
@@ -305,18 +283,72 @@ class AdminController extends Controller
         }
         // Update the App_settings
          Modules::where('id', $modules_id->id)->update([
-        "parent_id"=>request('parent_id'),
         "name"=>request('name'),
         "status"=>request('status'),
-        "order"=>request('order'),
-        "markup"=>request('markup'),
-        "c1"=>request('c1'),
-        "c2"=>request('c2'),
-        "c3"=>request('c3'),
-        "c4"=>request('c4'),
-        "c5"=>request('c5'),
-        "c6"=>request('c6')
+        "order"=>request('order')
         ]);
         return response()->json(['updated' => 'true','status'=>'200']);
+    }
+
+//=================================================
+        //show all modules_integrations record
+        public function modules_integrations()
+    {
+        return Modules_integrations::view_modules_integrate();
+    }
+        //Add new modules_integrations record
+        public function add_mod_integrat(Request $request) {
+        $this->validate($request, [
+        "modules_id"=> "required",
+        "name"=> "required",
+        "status"=> "required",
+        "order"=> "required",
+        "markup_b2c"=> "required",
+        "markup_b2b"=> "required",
+        "markup_b2e"=> "required",
+        "c1"=> "required",
+        "c2"=> "required",
+        "c3"=> "required",
+        "c4"=> "required",
+        "c5"=> "required",
+        "c6"=> "required",
+        "c7"=> "required",
+        "c8"=> "required",
+        "c9"=> "required",
+        "c10"=> "required"
+         ]);
+        return Modules_integrations::add_mod_integrat($request);
+
+    }
+
+            //update new modules_integrations record
+        public function update_mod_integrat(Request $request) {
+        $this->validate($request, [
+        "modules_id"=> "required",
+        "name"=> "required",
+        "status"=> "required",
+        "order"=> "required",
+        "markup_b2c"=> "required",
+        "markup_b2b"=> "required",
+        "markup_b2e"=> "required",
+        "c1"=> "required",
+        "c2"=> "required",
+        "c3"=> "required",
+        "c4"=> "required",
+        "c5"=> "required",
+        "c6"=> "required",
+        "c7"=> "required",
+        "c8"=> "required",
+        "c9"=> "required",
+        "c10"=> "required"
+         ]);
+        return Modules_integrations::update_mod_integrat($request);
+
+    }
+
+        //delete delete_mod_integrat record
+    public function delete_mod_integrat(Request $request)
+    {
+        return Modules_integrations::delete_mod_integrat($request);
     }
 }

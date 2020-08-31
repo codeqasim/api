@@ -1,9 +1,10 @@
 <?php
-
-namespace App\Http\Controllers;
+ 
+namespace App\Http\Controllers\b2b;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Model\Acounts_admins; 
-class Admin_accountsController extends Controller
+use App\Model\b2b\Accounts_b2b;
+class Accounts_b2bController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -15,16 +16,16 @@ class Admin_accountsController extends Controller
         //
     }
         //show all record
-        public function view()
-    {
-        return Acounts_admins::all_acounts_admins();
+        public function view(){
+        return Accounts_b2b::all_accounts_b2b();
     }
-//Add new Accounts_b2c record
+
+        //Add new Accounts_b2b record
         public function add(Request $request) {
         $this->validate($request, [
         "first_name"=> "required",
         "last_name"=> "required",
-        "email"=> "required|email|unique:acounts_admins",
+        "email"=> "required|email|unique:accounts_b2b",
         "password"=> "required",
         "dob"=> "required",
         "country"=> "required",
@@ -39,17 +40,18 @@ class Admin_accountsController extends Controller
         "verified"=> "required",
         "permissions"=> "required",
         "applied_for"=> "required",
-        "commission"=> "required"
+        "commission"=> "required",
+        "wallet_balance"=> "required"
          ]);
-        return Acounts_admins::add($request);
+        return Accounts_b2b::add($request);
 
     }
-    //delete Acounts_admins record
+    //delete Accounts_b2b record
     public function delete(Request $request)
     {
-        return Acounts_admins::del($request);
+        return Accounts_b2b::del($request);
     }
-        //update Acounts_admins record
+        //update Accounts_b2b record
     public function update(Request $request) {
         $this->validate($request, [
         "first_name"=> "required",
@@ -69,9 +71,10 @@ class Admin_accountsController extends Controller
         "verified"=> "required",
         "permissions"=> "required",
         "applied_for"=> "required",
-        "commission"=> "required"
+        "commission"=> "required",
+        "wallet_balance"=> "required"
          ]);
-        return Acounts_admins::Acounts_admins_update($request);
+        return Accounts_b2b::Accounts_b2b_update($request);
         
     }
 }

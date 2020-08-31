@@ -15,17 +15,9 @@ class CreateModulesTable extends Migration
     {
         Schema::create('modules', function (Blueprint $table) {
             $table->id();
-            $table->enum('parent_id', ['hotels', 'flights','tours','cars','visa','reviews','extra','rental']);
             $table->string('name');             
             $table->decimal('status',1,0);
-            $table->integer('order');
-            $table->string('markup');             
-            $table->string('c1');             
-            $table->string('c2');             
-            $table->string('c3');             
-            $table->string('c4');             
-            $table->string('c5');             
-            $table->string('c6');             
+            $table->integer('order');      
             $table->timestamps();
         });
     }

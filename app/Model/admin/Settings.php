@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Model;
+namespace App\Model\admin;
 
 use Illuminate\Database\Eloquent\Model;
 class Settings extends Model

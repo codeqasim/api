@@ -18,11 +18,11 @@ class CreateSettingsTable extends Migration
             $table->string('site_title');
             $table->string('home_title')->nullable();
             $table->string('site_url');
-            $table->addColumn('tinyInteger', 'ssl_url', ['length' => 2])->nullable();;
-            $table->string('tag_line')->nullable();;
+            $table->addColumn('tinyInteger', 'ssl_url', ['length' => 2])->nullable();
+            $table->string('tag_line')->nullable();
             $table->string('site_name');
             $table->string('address');
-            $table->string('phone')->nullable();;
+            $table->string('phone')->nullable();
             $table->string('copyright');
             $table->smallinteger('seo_status');
             $table->text('keywords')->nullable();

@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Model\Accounts_b2c;
-class Accounts_b2cController extends Controller
-{ 
+use App\Model\admin\Acounts_admins; 
+class Admin_accountsController extends Controller
+{
     /**
      * Create a new controller instance.
      *
@@ -17,14 +18,14 @@ class Accounts_b2cController extends Controller
         //show all record
         public function view()
     {
-        return Accounts_b2c::all_accounts_b2c();
+        return Acounts_admins::all_acounts_admins();
     }
-        //Add new Accounts_b2c record
+//Add new Accounts_b2c record
         public function add(Request $request) {
         $this->validate($request, [
         "first_name"=> "required",
         "last_name"=> "required",
-        "email"=> "required|email|unique:accounts_b2c",
+        "email"=> "required|email|unique:acounts_admins",
         "password"=> "required",
         "dob"=> "required",
         "country"=> "required",
@@ -41,15 +42,15 @@ class Accounts_b2cController extends Controller
         "applied_for"=> "required",
         "commission"=> "required"
          ]);
-        return Accounts_b2c::add($request);
+        return Acounts_admins::add($request);
 
     }
-    //delete Accounts_b2c record
+    //delete Acounts_admins record
     public function delete(Request $request)
     {
-        return Accounts_b2c::del($request);
+        return Acounts_admins::del($request);
     }
-        //update Accounts_b2c record
+        //update Acounts_admins record
     public function update(Request $request) {
         $this->validate($request, [
         "first_name"=> "required",
@@ -71,7 +72,7 @@ class Accounts_b2cController extends Controller
         "applied_for"=> "required",
         "commission"=> "required"
          ]);
-        return Accounts_b2c::Accounts_b2c_update($request);
+        return Acounts_admins::Acounts_admins_update($request);
         
     }
 }

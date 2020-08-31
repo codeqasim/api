@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers; 
+namespace App\Http\Controllers\b2e; 
+use App\Http\Controllers\Controller; 
 use Illuminate\Http\Request;
-use App\Model\Accounts_b2e;
+use App\Model\b2e\Accounts_b2e;
 class Accounts_b2eController extends Controller
 { 
     /**
