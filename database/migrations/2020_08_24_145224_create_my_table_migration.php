@@ -13,8 +13,7 @@ class CreateMyTableMigration extends Migration
      */
     public function up()
     {
-        \DB::unprepared(file_get_contents('database/pt_accounts.sql'));
-        \DB::unprepared(file_get_contents('database/pt_flights_countries.sql'));
+        \DB::unprepared(file_get_contents('database/countries.sql'));
         
     }
 
