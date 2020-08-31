@@ -8,9 +8,17 @@ class Modules extends Model
 {
 public $table = "modules";
 protected $fillable = [
+		"parent_id",
 		"name",
 		"status",
 		"order",
+		"markup",
+		"c1",
+		"c2",
+		"c3",
+		"c4",
+		"c5",
+		"c6"
     ];
 
     /**
