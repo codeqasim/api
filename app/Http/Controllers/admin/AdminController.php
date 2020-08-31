@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Model\admin\Settings;
 use App\Model\admin\Modules;
 use App\Model\admin\Modules_integrations;
+use App\Model\globle\Currencies;
 use DB;
 class AdminController extends Controller
 {
@@ -350,5 +351,49 @@ class AdminController extends Controller
     public function delete_mod_integrat(Request $request)
     {
         return Modules_integrations::delete_mod_integrat($request);
+    }
+
+            //show all Currencies record
+        public function view_currencies()
+    {
+        return Currencies::view_currencies();
+    }
+
+    //Add new Currencies
+        public function add_currencies(Request $request) {
+        $this->validate($request, [
+        "name"=> "required",
+        "code"=> "required",
+        "rate"=> "required",
+        "decimals"=> "required",
+        "placement"=> "required",
+        "order"=> "required",
+        "default"=> "required",
+        "active"=> "required"
+         ]);
+        return Currencies::add_currencies($request);
+
+    }
+
+    //update Currencies record
+        public function update_currencies(Request $request) {
+        $this->validate($request, [
+        "name"=> "required",
+        "code"=> "required",
+        "rate"=> "required",
+        "decimals"=> "required",
+        "placement"=> "required",
+        "order"=> "required",
+        "default"=> "required",
+        "active"=> "required"
+         ]);
+        return Currencies::update_currencies($request);
+
+    }
+
+        //delete delete_Currencies record
+    public function delete_currencies(Request $request)
+    {
+        return Currencies::delete_currencies($request);
     }
 }

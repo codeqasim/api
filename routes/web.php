@@ -93,6 +93,18 @@ $router->post(env("ADMIN_URL").'/accounts_b2e/update/{id}',
 	'b2e\Accounts_b2eController@update');
 });
 
+//currencies route
+$router->group(['middleware'=>'auth'], function ($router) {
+$router->post(env("ADMIN_URL").'/currencies/view',
+	'admin\AdminController@view_currencies');
+$router->post(env("ADMIN_URL").'/currencies/create',
+	'admin\AdminController@add_currencies');
+$router->delete(env("ADMIN_URL").'/currencies/del/{id}',
+	'admin\AdminController@delete_currencies');
+$router->post(env("ADMIN_URL").'/currencies/update/{id}',
+	'admin\AdminController@update_currencies');
+});
+
 //countries route
 $router->group(['middleware'=>'auth'], function ($router) {
 $router->post(env("ADMIN_URL").'/countries',

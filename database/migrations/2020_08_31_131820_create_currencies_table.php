@@ -22,8 +22,8 @@ class CreateCurrenciesTable extends Migration
             $table->addColumn('tinyInteger', 'decimals', ['length' => 1])->nullable();
             $table->enum('placement', ['before','after']);
             $table->addColumn('tinyInteger', 'order', ['length' => 1])->nullable();
-            $table->enum('default', ['Yes', 'No']);
-            $table->enum('active', ['Yes', 'No']);
+            $table->enum('default', ['1', '0']);
+            $table->enum('active', ['1', '0']);
             $table->timestamps();
         });
     }
