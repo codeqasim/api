@@ -3,21 +3,18 @@
 namespace App\Model\globle;
 
 use Illuminate\Database\Eloquent\Model;
-class Languages extends Model
+class Languages_translations extends Model
 {
-    public $table = "Languages";
+    public $table = "languages_translations";
     /**
      * The attributes that are mass assignable.
      * 
      * @var array
      */
     protected $fillable = [
-        "name",
-        "country_id",
-        "code",
-        "dir",
-        "status",
-        "default"
+        "lang_id",
+        "lang_code_id",
+        "trans"
     ];
 
     /**

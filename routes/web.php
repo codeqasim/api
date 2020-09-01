@@ -116,6 +116,8 @@ $router->post(env("ADMIN_URL").'/countries',
 $router->group(['middleware'=>'auth'], function ($router) {
 $router->post('/settings',
 	'b2c\Frontsettings@settings');
+$router->post('/languages_trans',
+	'b2c\Frontsettings@languages_codes');
 });
 
 //Front modules route

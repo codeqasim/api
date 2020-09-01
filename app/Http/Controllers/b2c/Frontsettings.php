@@ -7,6 +7,8 @@ use App\Model\admin\Settings;
 use App\Model\admin\Modules;
 use App\Model\globle\Currencies;
 use App\Model\globle\languages;
+use App\Model\globle\languages_codes;
+use App\Model\globle\languages_translations;
 
 class Frontsettings extends Controller
 {
@@ -22,6 +24,34 @@ class Frontsettings extends Controller
         //show all record
         public function settings()
     {
-        return array("settings" => Settings::get(),"modules"=>Modules::where('status',1)->get(),"currencies"=>Currencies::get(),"languages"=>languages::get());
+        return array(
+            "settings" => Settings::get()->makeHidden(['created_at','updated_at']),
+
+            "modules"=>Modules::where('status',1)->get()->makeHidden(['created_at','updated_at']),
+
+            "currencies"=>Currencies::get()->makeHidden(['created_at','updated_at']),
+
+            "languages"=>languages::get()->makeHidden(['created_at','updated_at']));
+    }
+
+    public function languages_codes(Request $request)
+    {
+        //languages_translations
+        //languages_codes
+        $this->validate($request, [
+        "id"=> "required|integer"]);
+        $lang_trans = [];
+        $languages_translations = languages_translations::where('lang_id',$request->id)->get()->makeHidden(['created_at','updated_at']);
+        foreach ($languages_translations as $key => $value) {
+        $lang_code_id =  languages_codes::where('id',$value->lang_code_id)->get();
+        foreach ($lang_code_id as $lang => $lang_code) {
+
+        $keyword = $lang_code->keyword;
+        $obj =  languages_translations::where('lang_code_id',$lang_code->id)->get()->makeHidden(['id','lang_id','lang_code_id','created_at','updated_at']);
+              array_push($lang_trans, array('keyword'=>$keyword,'trans'=>$obj));
+        
+            }
+        }
+        return $lang_trans;
     }
 }
