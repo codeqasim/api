@@ -71,7 +71,5 @@ class Settings extends Model
      *
      * @var array
      */
-    protected $hidden = [
-        'password',
-    ];
+    protected $hidden = ['created_at','updated_at'];
 }

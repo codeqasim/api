@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Model\admin\Settings;
 use App\Model\admin\Modules;
 use App\Model\globle\Currencies;
+use App\Model\globle\languages;
 
 class Frontsettings extends Controller
 {
@@ -21,6 +22,6 @@ class Frontsettings extends Controller
         //show all record
         public function settings()
     {
-        return array("Settings" => Settings::get(),"Modules"=>Modules::where('status',1)->get(),"Currencies"=>Currencies::get());
+        return array("settings" => Settings::get(),"modules"=>Modules::where('status',1)->get(),"currencies"=>Currencies::get(),"languages"=>languages::get());
     }
 }
