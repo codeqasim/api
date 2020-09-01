@@ -43,7 +43,6 @@ class Accounts_b2cController extends Controller
         "commission"=> "required"
          ]);
         return Accounts_b2c::add($request);
-
     }
     //delete Accounts_b2c record
     public function delete(Request $request)
