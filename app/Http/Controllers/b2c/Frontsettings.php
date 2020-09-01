@@ -25,13 +25,10 @@ class Frontsettings extends Controller
         public function settings()
     {
         return array(
-            "settings" => Settings::get()->makeHidden(['created_at','updated_at']),
-
-            "modules"=>Modules::where('status',1)->get()->makeHidden(['created_at','updated_at']),
-
-            "currencies"=>Currencies::get()->makeHidden(['created_at','updated_at']),
-
-            "languages"=>languages::get()->makeHidden(['created_at','updated_at']));
+        "settings" => Settings::get()->makeHidden(['created_at','updated_at']),
+        "modules"=>Modules::where('status',1)->get()->makeHidden(['created_at','updated_at']),
+        "currencies"=>Currencies::get()->makeHidden(['created_at','updated_at']),
+        "languages"=>languages::get()->makeHidden(['created_at','updated_at']));
     }
 
     public function languages_codes(Request $request)

@@ -105,6 +105,18 @@ $router->post(env("ADMIN_URL").'/currencies/update/{id}',
 	'admin\AdminController@update_currencies');
 });
 
+//languages route
+$router->group(['middleware'=>'auth'], function ($router) {
+$router->post(env("ADMIN_URL").'/languages/view',
+	'admin\LanguagesController@view_languages');
+$router->post(env("ADMIN_URL").'/languages/create',
+	'admin\LanguagesController@add_languages');
+$router->delete(env("ADMIN_URL").'/languages/del/{id}',
+	'admin\LanguagesController@delete_languages');
+$router->post(env("ADMIN_URL").'/languages/update/{id}',
+	'admin\LanguagesController@update_languages');
+});
+
 //countries route
 $router->group(['middleware'=>'auth'], function ($router) {
 $router->post(env("ADMIN_URL").'/countries',
