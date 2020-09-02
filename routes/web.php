@@ -6,7 +6,7 @@ $router->get('/', function () use ($router) {
 
 //settings
 $router->group(['middleware'=>'auth'], function ($router) {
-$router->post(env("ADMIN_URL").'/settings',
+$router->post(env("ADMIN_URL").'/settings/view',
 	'admin\AdminController@settings');
 $router->post(env("ADMIN_URL").'/settings/view/{id}',
 	'admin\AdminController@settings_view');
