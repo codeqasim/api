@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 use App\Model\admin\Settings;
 use App\Model\admin\Modules;
 use App\Model\globle\Currencies;
-use App\Model\globle\languages;
-use App\Model\globle\languages_codes;
-use App\Model\globle\languages_translations;
+use App\Model\globle\Languages;
+use App\Model\globle\Languages_codes;
+use App\Model\globle\Languages_translations;
 
 class Frontsettings extends Controller
 {

@@ -34,12 +34,12 @@ class AuthServiceProvider extends ServiceProvider
 
             $header = $request->header('token');
             if ($header && $header == env("ADMIN_KEY")) {
-                return new Settings();
+                return true;
             }
             return null;
             // if ($request->input('api_token')) {
             //     return User::where('api_token', $request->input('api_token'))->first();
             // }
         });
-    } 
+    }
 }
