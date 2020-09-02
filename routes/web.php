@@ -117,6 +117,18 @@ $router->post(env("ADMIN_URL").'/languages/update/{id}',
 	'admin\LanguagesController@update_languages');
 });
 
+//Languages_trans route
+$router->group(['middleware'=>'auth'], function ($router) {
+$router->post(env("ADMIN_URL").'/languages_trans/view',
+	'admin\Languages_trans@view_languages_trans');
+$router->post(env("ADMIN_URL").'/languages_trans/create',
+	'admin\Languages_trans@add_languages_trans');
+$router->delete(env("ADMIN_URL").'/languages_trans/del/{id}',
+	'admin\Languages_trans@delete_languages_trans');
+$router->post(env("ADMIN_URL").'/languages_trans/update/{id}',
+	'admin\Languages_trans@update_languages_trans');
+});
+
 //countries route
 $router->group(['middleware'=>'auth'], function ($router) {
 $router->post(env("ADMIN_URL").'/countries',
