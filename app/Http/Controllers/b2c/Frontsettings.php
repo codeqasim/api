@@ -5,10 +5,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\admin\Settings;
 use App\Model\admin\Modules;
+use App\Model\globle\Countries;
 use App\Model\globle\Currencies;
 use App\Model\globle\Languages;
 use App\Model\globle\Languages_codes;
 use App\Model\globle\Languages_translations;
+use DB;
 
 class Frontsettings extends Controller
 {
@@ -28,7 +30,17 @@ class Frontsettings extends Controller
         "settings" => Settings::get()->makeHidden(['created_at','updated_at']),
         "modules"=>Modules::where('status',1)->get()->makeHidden(['created_at','updated_at']),
         "currencies"=>Currencies::get()->makeHidden(['created_at','updated_at']),
-        "languages"=>languages::get()->makeHidden(['created_at','updated_at']));
+        "languages"=>DB::table('languages')
+        ->join('countries', 'countries.id', '=', 'languages.country_id')
+        ->select(
+                'languages.id',
+                'languages.name',
+                'countries.iso as country_code',
+                'languages.code',
+                'languages.dir',
+                'languages.status',
+                'languages.default')
+            ->get());
     }
 
     public function languages_codes(Request $request)
