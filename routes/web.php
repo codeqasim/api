@@ -150,8 +150,13 @@ $router->post('/modules',
 	'Frontmodules@modules');
 });
 
-
-
+//////////////////////////////
+/// Mobile Route /////////////
+/// //////////////////////////
+$router->group(['middleware'=>'auth'], function ($router) {
+    $router->post('/language_trans_mob',
+        'b2c\Mobilesetting@mobile_languages_codes');
+});
 //================================
 $router->get('/mail',
 	'EmailController@email');
