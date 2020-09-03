@@ -3,7 +3,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class language_trans_mob
+class CorsMiddleware
 {
     /**
      * Handle an incoming request.
