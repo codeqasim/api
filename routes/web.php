@@ -174,6 +174,10 @@ $router->post('/settings',
 	'b2c\Frontsettings@settings');
 $router->post('/languages_trans',
 	'b2c\Frontsettings@languages_codes');
+$router->post('/blog_category/view',
+	'b2c\Blog_categoryController@view_blog_category');
+$router->post('/blog_posts/view',
+	'b2c\Blog_postsController@view_blog_posts');
 });
 
 //Front modules route

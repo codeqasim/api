@@ -5,6 +5,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\admin\Settings;
 use App\Model\admin\Modules;
+use App\Model\admin\Blog_category;
+use App\Model\admin\Blog_posts;
 use App\Model\globle\Countries;
 use App\Model\globle\Currencies;
 use App\Model\globle\Languages;
@@ -40,6 +42,23 @@ class Frontsettings extends Controller
                 'languages.dir',
                 'languages.status',
                 'languages.default')
+            ->get(),
+            "Blog_category"=>Blog_category::get()->makeHidden(['created_at','updated_at']),
+        "blog_posts"=>DB::table('blog_posts')
+        ->join('Blog_category', 'Blog_category.id', '=', 'blog_posts.category_id')
+        ->select(
+                'blog_posts.id',
+                'blog_posts.title',
+                'blog_posts.slug',
+                'blog_posts.img',
+                'Blog_category.name as Blog_category',
+                'blog_posts.desc',
+                'blog_posts.status',
+                'blog_posts.featured',
+                'blog_posts.seo_title',
+                'blog_posts.seo_keywords',
+                'blog_posts.seo_desc',
+            )
             ->get());
     }
 
