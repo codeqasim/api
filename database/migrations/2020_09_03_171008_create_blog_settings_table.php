@@ -13,14 +13,14 @@ class CreateBlogSettingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('blog__settings', function (Blueprint $table) {
+        Schema::create('blog_settings', function (Blueprint $table) {
             $table->id();
             $table->enum('target',['self','blank']);
             $table->string('title');
             $table->string('feature_blogs');
             $table->string('listing_blogs');
             $table->string('search_blogs');
-            $table->string('related blogs');
+            $table->string('related_blogs');
             $table->timestamps();
         });
     }
@@ -32,6 +32,6 @@ class CreateBlogSettingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('blog__settings');
+        Schema::dropIfExists('blog_settings');
     }
 }

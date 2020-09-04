@@ -18,6 +18,14 @@ $router->post(env("ADMIN_URL").'/settings/update/{id}',
 	'admin\AdminController@update');
 });
 
+//Blog_settings
+$router->group(['middleware'=>'auth'], function ($router) {
+$router->post(env("ADMIN_URL").'/blog_settings/view',
+	'admin\Blog_settingsController@view_blog_settings');
+$router->post(env("ADMIN_URL").'/blog_settings/update/{id}',
+	'admin\Blog_settingsController@update_blog_settings');
+});
+
 
 //modules
 $router->group(['middleware'=>'auth'], function ($router) {
