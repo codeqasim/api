@@ -199,4 +199,16 @@ $router->get('/mail',
 
 $router->get('/crud',
 	'XcrudController@index');
-
+////////////////////////////////////////////////////
+/////////////////////// CMS ROUTE //////////////////
+/// ///////////////////////////////////////////////
+$router->group(['middleware'=>'auth'], function ($router) {
+    $router->post(env("ADMIN_URL").'/cms/create',
+        'admin\Cms_contentController@add_cms_page');
+    $router->post(env("ADMIN_URL").'/cms/update',
+        'admin\Cms_contentController@update_cms_page');
+    $router->post(env("ADMIN_URL").'/cms/all',
+        'admin\Cms_contentController@all_cms_page');
+    $router->post(env("ADMIN_URL").'/cms/delete',
+        'admin\Cms_contentController@delete_cms_page');
+});
