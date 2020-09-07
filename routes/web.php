@@ -170,8 +170,8 @@ $router->post(env("ADMIN_URL").'/countries',
 //==========Front==========
 //Front settings route
 $router->group(['middleware'=>'auth'], function ($router) {
-$router->post('/settings',
-	'b2c\Frontsettings@home');
+$router->post('/home',
+	'b2c\Frontsettings@settings');
 $router->post('/languages_trans_web',
 	'b2c\Frontsettings@languages_codes');
 $router->post('/blog_category/view',
