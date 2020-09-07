@@ -41,7 +41,8 @@ class Frontsettings extends Controller
                 'languages.code',
                 'languages.dir',
                 'languages.status',
-                'languages.default')
+                'languages.default',
+                'languages.featured')
             ->get(),
             "blog_category"=>Blog_category::get()->makeHidden(['created_at','updated_at']),
         "blog_posts"=>DB::table('blog_posts')

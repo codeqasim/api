@@ -20,7 +20,8 @@ class Currencies extends Model
         "placement",
         "order",
         "default",
-        "active"
+        "active",
+        "featured"
     ];
 
 

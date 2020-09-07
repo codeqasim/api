@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 class CreateLanguagesTable extends Migration
-{
+{ 
     /**
      * Run the migrations.
      *
@@ -21,6 +21,7 @@ class CreateLanguagesTable extends Migration
             $table->string('dir')->nullable();
             $table->enum('status', ['1', '0'])->nullable();
             $table->enum('default', ['1', '0'])->nullable();
+            $table->enum('featured', ['1', '0'])->nullable();
             $table->timestamps();
         });
     }

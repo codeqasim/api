@@ -17,7 +17,8 @@ class Languages extends Model
         "code",
         "dir",
         "status", 
-        "default"
+        "default",
+        "featured"
     ];
 
 
