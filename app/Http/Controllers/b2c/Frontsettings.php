@@ -43,7 +43,7 @@ class Frontsettings extends Controller
                 'languages.status',
                 'languages.default')
             ->get(),
-            "Blog_category"=>Blog_category::get()->makeHidden(['created_at','updated_at']),
+            "blog_category"=>Blog_category::get()->makeHidden(['created_at','updated_at']),
         "blog_posts"=>DB::table('blog_posts')
         ->join('Blog_category', 'Blog_category.id', '=', 'blog_posts.category_id')
         ->select(
