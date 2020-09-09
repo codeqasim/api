@@ -45,8 +45,24 @@ class Frontsettings extends Controller
                 'languages.default',
                 'languages.featured')
             ->get(),
-            "blogs"=>array(
-                "featured_blog"=>DB::table('blog_posts')
+            "featured"=>array(
+        //         "featured_blog"=>DB::table('blog_posts')
+        // ->join('Blog_category', 'Blog_category.id', '=', 'blog_posts.category_id')
+        // ->select(
+        //         'blog_posts.id',
+        //         'blog_posts.title',
+        //         'blog_posts.slug',
+        //         'blog_posts.img',
+        //         'Blog_category.name as Blog_category',
+        //         'blog_posts.desc',
+        //         'blog_posts.status',
+        //         'blog_posts.featured',
+        //         'blog_posts.seo_title',
+        //         'blog_posts.seo_keywords',
+        //         'blog_posts.seo_desc',
+        //     )
+        //     ->get(),
+            $module[0]->name=>DB::table('blog_posts')
         ->join('Blog_category', 'Blog_category.id', '=', 'blog_posts.category_id')
         ->select(
                 'blog_posts.id',
@@ -62,12 +78,8 @@ class Frontsettings extends Controller
                 'blog_posts.seo_desc',
             )
             ->get(),
-            $module[0]->name=>DB::table('modules')->where('status',1)->where('name','blog')->select('name')->get(),
             $module[1]->name=>DB::table('modules')->where('status',1)->where('name','flights')->select('name')->get(),
-            $module[2]->name=>DB::table('modules')->where('status',1)->where('name','hotels')->select('name')->get()
-           
-            
-        )
+            $module[2]->name=>DB::table('modules')->where('status',1)->where('name','hotels')->select('name')->get())
             // "blog_category"=>Blog_category::get()->makeHidden(['created_at','updated_at']),
         );
 
