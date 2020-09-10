@@ -32,7 +32,23 @@ class Frontsettings extends Controller
         $data = array(
         "settings" => Settings::get()->makeHidden(['created_at','updated_at']),
         "modules"=>Modules::where('status',1)->get()->makeHidden(['created_at','updated_at']),
-        "currencies"=>Currencies::get()->makeHidden(['created_at','updated_at']),
+        "currencies"=>DB::table('currencies')
+        ->join('countries', 'countries.id', '=', 'currencies.country_id')
+        ->select(
+                'currencies.id',
+                'currencies.name',
+                'countries.nicename as country_name',
+                "currencies.symbol",
+                "currencies.code",
+                "currencies.rate",
+                "currencies.decimals",
+                "currencies.placement",
+                "currencies.order",
+                "currencies.default",
+                "currencies.active",
+                "currencies.featured"
+                )
+            ->get(),
         "languages"=>DB::table('languages')
         ->join('countries', 'countries.id', '=', 'languages.country_id')
         ->select(
@@ -46,22 +62,6 @@ class Frontsettings extends Controller
                 'languages.featured')
             ->get(),
             "featured"=>array(
-        //         "featured_blog"=>DB::table('blog_posts')
-        // ->join('Blog_category', 'Blog_category.id', '=', 'blog_posts.category_id')
-        // ->select(
-        //         'blog_posts.id',
-        //         'blog_posts.title',
-        //         'blog_posts.slug',
-        //         'blog_posts.img',
-        //         'Blog_category.name as Blog_category',
-        //         'blog_posts.desc',
-        //         'blog_posts.status',
-        //         'blog_posts.featured',
-        //         'blog_posts.seo_title',
-        //         'blog_posts.seo_keywords',
-        //         'blog_posts.seo_desc',
-        //     )
-        //     ->get(),
             $module[0]->name=>DB::table('blog_posts')
         ->join('Blog_category', 'Blog_category.id', '=', 'blog_posts.category_id')
         ->select(
