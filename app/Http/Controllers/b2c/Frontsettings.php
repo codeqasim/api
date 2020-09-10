@@ -55,6 +55,7 @@ class Frontsettings extends Controller
                 'languages.id',
                 'languages.name',
                 'countries.iso as country_code',
+                'countries.nicename as country_name',
                 'languages.code',
                 'languages.dir',
                 'languages.status',
