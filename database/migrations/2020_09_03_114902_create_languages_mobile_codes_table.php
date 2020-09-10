@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMobileLanguagesCodesTable extends Migration
+class CreateLanguagesMobileCodesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateMobileLanguagesCodesTable extends Migration
      */
     public function up()
     {
-        Schema::create('mobile_languages_codes', function (Blueprint $table) {
+        Schema::create('languages_mobile_codes', function (Blueprint $table) {
             $table->id();
             $table->string('keyword')->nullable();
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateMobileLanguagesCodesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mobile_languages_codes');
+        Schema::dropIfExists('languages_mobile_codes');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMobileLanguagesTranslationsTable extends Migration
+class CreateLanguagesMobileTranslationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateMobileLanguagesTranslationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('mobile_languages_translations', function (Blueprint $table) {
+        Schema::create('languages_mobile_translations', function (Blueprint $table) {
             $table->id();
             $table->biginteger('lang_id');
             $table->biginteger('lang_code_id');
@@ -29,6 +29,6 @@ class CreateMobileLanguagesTranslationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mobile_languages_translations');
+        Schema::dropIfExists('languages_mobile_translations');
     }
 }
