@@ -3,10 +3,10 @@
 namespace App\Model\admin;
 use Illuminate\Database\Eloquent\Model;
 
-class Acounts_admins extends Model
+class Accounts_admins extends Model
 {
 
-	public $table = "acounts_admins";
+	public $table = "accounts_admins";
 	protected $fillable = [
 		"first_name",
 		"last_name",
@@ -29,11 +29,11 @@ class Acounts_admins extends Model
     ];
 
       public static function all_acounts_admins(){
-        return Acounts_admins::get();
+        return Accounts_admins::get();
     }
 
      public static function add($request){
-         Acounts_admins::create([
+         Accounts_admins::create([
     	"first_name"=>$request->first_name,
 		"last_name"=>$request->last_name,
 		"email"=>$request->email,
@@ -57,7 +57,7 @@ class Acounts_admins extends Model
     }
 
         public static function del($request) {
-        $Acounts_admins_id = Acounts_admins::find($request->id);
+        $Acounts_admins_id = Accounts_admins::find($request->id);
         if (!empty($Acounts_admins_id)) {
            $Acounts_admins_id->delete();
        return response()->json(['deleted' => 'true','status'=>'200']);
@@ -67,13 +67,13 @@ class Acounts_admins extends Model
     }
 
       	public static function Acounts_admins_update($request){
-  		$Acounts_admins_id = Acounts_admins::find($request->id);
+  		$Acounts_admins_id = Accounts_admins::find($request->id);
   		// Return error if not found
         if (empty($Acounts_admins_id)) {
             return response()->json(['updated' => $Acounts_admins_id == 1,'status'=>'200']);
         }
-        // Update the Acounts_admins
-         Acounts_admins::where('id', $Acounts_admins_id->id)->update([
+        // Update the Accounts_admins
+         Accounts_admins::where('id', $Acounts_admins_id->id)->update([
     	"first_name"=>$request->first_name,
 		"last_name"=>$request->last_name,
 		"email"=>$request->email,

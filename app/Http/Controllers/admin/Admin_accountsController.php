@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Model\admin\Acounts_admins; 
+use App\Model\admin\Accounts_admins; 
 class Admin_accountsController extends Controller
 {
     /**
@@ -18,14 +18,14 @@ class Admin_accountsController extends Controller
         //show all record
         public function view()
     {
-        return Acounts_admins::all_acounts_admins();
+        return Accounts_admins::all_acounts_admins();
     }
 //Add new Accounts_b2c record
         public function add(Request $request) {
         $this->validate($request, [
         "first_name"=> "required",
         "last_name"=> "required",
-        "email"=> "required|email|unique:acounts_admins",
+        "email"=> "required|email|unique:accounts_admins",
         "password"=> "required",
         "dob"=> "required",
         "country"=> "required",
@@ -42,15 +42,15 @@ class Admin_accountsController extends Controller
         "applied_for"=> "required",
         "commission"=> "required"
          ]);
-        return Acounts_admins::add($request);
+        return Accounts_admins::add($request);
 
     }
-    //delete Acounts_admins record
+    //delete Accounts_admins record
     public function delete(Request $request)
     {
-        return Acounts_admins::del($request);
+        return Accounts_admins::del($request);
     }
-        //update Acounts_admins record
+        //update Accounts_admins record
     public function update(Request $request) {
         $this->validate($request, [
         "first_name"=> "required",
@@ -72,7 +72,7 @@ class Admin_accountsController extends Controller
         "applied_for"=> "required",
         "commission"=> "required"
          ]);
-        return Acounts_admins::Acounts_admins_update($request);
+        return Accounts_admins::Acounts_admins_update($request);
         
     }
 }
