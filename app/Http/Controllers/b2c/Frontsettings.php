@@ -90,16 +90,20 @@ class Frontsettings extends Controller
     public function languages_codes(Request $request)
     {
         //languages_translations
-        //languages_codes
+        //languages_codes 
         $this->validate($request, [
         "id"=> "required|integer"]);
         $lang_trans = [];
         $languages_translations = languages_translations::where('lang_id',$request->id)->get()->makeHidden(['created_at','updated_at']);
+        
         $p_languages = languages::select('name')->where('id',$request->id)->get();
+        
         foreach ($languages_translations as $key => $value) {
         $lang_code_id =  languages_codes::where('id',$value->lang_code_id)->get();
+
         foreach ($lang_code_id as $lang => $lang_code) {
         $keyword = $lang_code->keyword;
+
         $obj =  languages_translations::select('trans')->where('lang_code_id',$lang_code->id)->get();
 
         foreach ($obj as $key => $value) {

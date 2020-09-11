@@ -21,33 +21,33 @@ $router->post(env("ADMIN_URL").'/settings/update/{id}',
 //Blog_settings
 $router->group(['middleware'=>'auth'], function ($router) {
 $router->post(env("ADMIN_URL").'/blog_settings/view',
-	'admin\Blog_settingsController@view_blog_settings');
+	'admin\BlogController@view_blog_settings');
 $router->post(env("ADMIN_URL").'/blog_settings/update/{id}',
-	'admin\Blog_settingsController@update_blog_settings');
+	'admin\BlogController@update_blog_settings');
 });
 
 //blog_category
 $router->group(['middleware'=>'auth'], function ($router) {
 $router->post(env("ADMIN_URL").'/blog_category/view',
-	'admin\Blog_categoryController@view_blog_category');
+	'admin\BlogController@view_blog_category');
 $router->post(env("ADMIN_URL").'/blog_category/create',
-	'admin\Blog_categoryController@add_blog_category');
+	'admin\BlogController@add_blog_category');
 $router->delete(env("ADMIN_URL").'/blog_category/del/{id}',
-	'admin\Blog_categoryController@delete_blog_category');
+	'admin\BlogController@delete_blog_category');
 $router->post(env("ADMIN_URL").'/blog_category/update/{id}',
-	'admin\Blog_categoryController@update_blog_category');
+	'admin\BlogController@update_blog_category');
 });
 
 //blog_posts
 $router->group(['middleware'=>'auth'], function ($router) {
 $router->post(env("ADMIN_URL").'/blog_posts/view',
-	'admin\Blog_postsController@view_blog_posts');
+	'admin\BlogController@view_blog_posts');
 $router->post(env("ADMIN_URL").'/blog_posts/create',
-	'admin\Blog_postsController@add_blog_posts');
+	'admin\BlogController@add_blog_posts');
 $router->delete(env("ADMIN_URL").'/blog_posts/del/{id}',
-	'admin\Blog_postsController@delete_blog_posts');
+	'admin\BlogController@delete_blog_posts');
 $router->post(env("ADMIN_URL").'/blog_posts/update/{id}',
-	'admin\Blog_postsController@update_blog_posts');
+	'admin\BlogController@update_blog_posts');
 });
 
 
@@ -175,9 +175,9 @@ $router->post('/home',
 $router->post('/languages_trans_web',
 	'b2c\Frontsettings@languages_codes');
 $router->post('/blog_category/view',
-	'b2c\Blog_categoryController@view_blog_category');
+	'b2c\FrontBlog@view_blog_category');
 $router->post('/blog_posts/view',
-	'b2c\Blog_postsController@view_blog_posts');
+	'b2c\FrontBlog@view_blog_posts');
 });
 
 //Front modules route
