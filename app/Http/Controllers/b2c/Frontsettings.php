@@ -88,47 +88,23 @@ class Frontsettings extends Controller
     }
 
     public function languages_codes(Request $request)
-    { 
-
-    $this->validate($request, ["id"=> "required|integer"]);
-
-    $lang_trans = [];
-    $languages_translations = languages_translations::where('lang_id',$request->id)->get()->makeHidden(['created_at','updated_at']);
-        
-        $p_languages = languages::select('name')->where('id',$request->id)->get();
-        
-        foreach ($languages_translations as $key => $value) {
-        $lang_code_id =  languages_codes::where('id',$value->lang_code_id)->get();
-
-        foreach ($lang_code_id as $lang => $lang_code) {
-        $keyword = $lang_code->keyword;
-
-        $obj =  languages_translations::select('trans','module_name')->where('lang_code_id',$lang_code->id)->get();
-///////////////////////////////////new/////////////////////////////////
-        $module=DB::table('modules')->where('status',1)->select('name')->get();
-        foreach ($obj as $key => $value) {
-            $all_trans = $value->trans;
-            $all_module = $value->module_name;
-
-            foreach ($module as $module_key => $module_value) {
-               if ($all_module == $module_value->name) {
-
-                // echo $all_module;
-               array_push($lang_trans, array($all_module=>array('keyword'=>$keyword,'translation'=>$value->trans)));
-               }
+    {
+        $this->validate($request, ["id"=> "required|integer"]);
+        $record = [];
+            $p_languages = languages::select('name')->where('id',$request->id)->get();
+            $languages_translations = languages_translations::where('lang_id',$request->id)->get()->makeHidden(['created_at','updated_at']);
+            foreach ($languages_translations as $key => $value) {
+                $lang_code_id = languages_codes::where('id', $value->lang_code_id)->get()->makeHidden(['created_at','updated_at']);
+                foreach ($lang_code_id as $lang => $lang_code) {
+                    $keyword = $lang_code->keyword;
+                   array_push($record,(object)[
+                       'keyword'=>$keyword,
+                       'translation'=>$value->trans
+                   ]);
+                }
             }
-          }
-          //////////////////////new code end//////////////
-          
-/////////////////////////////old/////////////////////////////
-          // foreach ($obj as $key => $value) {
-          //   array_push($lang_trans, array('keyword'=>$keyword,'translation'=>$value->trans));
-          //   }
-            ////////////////////end///////////////////
-         }
-        }
-        return array(strtolower($p_languages[0]->name) => $lang_trans);
+        return array(strtolower($p_languages[0]->name) => $record);
     }
-        
+
 }
 
