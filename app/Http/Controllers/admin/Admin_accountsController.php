@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\admin\Accounts_admins; 
+use DB;
 class Admin_accountsController extends Controller
 {
     /**
@@ -74,5 +75,15 @@ class Admin_accountsController extends Controller
          ]);
         return Accounts_admins::Acounts_admins_update($request);
         
+    }
+  
+         //Authenticate the admin
+    public function checklogin(Request $request) {
+     $this->validate($request, [
+      'email'   => 'required|email',
+      'password'  => 'required'
+      // 'password'  => 'required|alphaNum|min:3'
+     ]);
+     return Accounts_admins::checklogin($request);
     }
 }

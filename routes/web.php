@@ -87,6 +87,8 @@ $router->delete(env("ADMIN_URL").'/accounts/del/{id}',
 	'admin\Admin_accountsController@delete');
 $router->post(env("ADMIN_URL").'/accounts/update/{id}',
 	'admin\Admin_accountsController@update');
+$router->post(env("ADMIN_URL").'/login',
+	'admin\Admin_accountsController@checklogin');
 });
 
 //accounts_b2b route

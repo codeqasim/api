@@ -11,21 +11,7 @@ class Accounts_admins extends Model
 		"first_name",
 		"last_name",
 		"email",
-		"password",
-		"dob",
-		"country",
-		"city",
-		"address_1",
-		"address_2",
-		"mobile",
-		"postal_code",
-		"passport",
-		"type",
-		"status",
-		"verified",
-		"permissions",
-		"applied_for",
-		"commission"
+		"password"
     ];
 
       public static function all_acounts_admins(){
@@ -95,5 +81,17 @@ class Accounts_admins extends Model
         ]);
         return response()->json(['updated' => 'true','status'=>'200']);
     }
+
+
+     public static function checklogin($request) {
+      $email = $request->get('email');
+      $password = $request->get('password');
+      $admin = Accounts_admins::where('email', $email)->where('password', $password)->first();
+      if($admin) {
+        // return response()->json($admin, 200);
+        return response()->json(['message' => "successed"], 200);
+      }
+      return response()->json(['message' => "Admin details incorrect"], 404);
+     }
 
 }
