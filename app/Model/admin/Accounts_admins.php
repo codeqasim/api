@@ -84,8 +84,8 @@ class Accounts_admins extends Model
 
 
      public static function checklogin($request) {
-      $email = $request->input('email');
-      $password = $request->input('password');
+      $email = $request->post('email');
+      $password = $request->post('password');
       $admin = Accounts_admins::where('email', $email)->where('password', $password)->first();
       if($admin) {
         // return response()->json($admin, 200);
