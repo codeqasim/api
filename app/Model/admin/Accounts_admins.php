@@ -23,7 +23,7 @@ class Accounts_admins extends Model
     	"first_name"=>$request->first_name,
 		"last_name"=>$request->last_name,
 		"email"=>$request->email,
-		"password"=>$request->password,
+		"password"=>md5($request->password),
 		"dob"=>$request->dob,
 		"country"=>$request->country,
 		"city"=>$request->city,
@@ -63,7 +63,7 @@ class Accounts_admins extends Model
     	"first_name"=>$request->first_name,
 		"last_name"=>$request->last_name,
 		"email"=>$request->email,
-		"password"=>$request->password,
+		"password"=>md5($request->password),
 		"dob"=>$request->dob,
 		"country"=>$request->country,
 		"city"=>$request->city,
@@ -86,7 +86,7 @@ class Accounts_admins extends Model
      public static function checklogin($request) {
       $email = $request->post('email');
       $password = $request->post('password');
-      $admin = Accounts_admins::where('email', $email)->where('password', $password)->first();
+      $admin = Accounts_admins::where('email', $email)->where('password', md5($password))->first();
       if($admin) {
         // return response()->json($admin, 200);
         return response()->json(['message' =>  200]);
