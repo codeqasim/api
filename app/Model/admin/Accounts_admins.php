@@ -89,9 +89,9 @@ class Accounts_admins extends Model
       $admin = Accounts_admins::where('email', $email)->where('password', $password)->first();
       if($admin) {
         // return response()->json($admin, 200);
-        return response()->json(['message' => "successed"], 200);
+        return response()->json(['message' =>  200]);
       }
-      return response()->json(['message' => "Admin details incorrect"], 404);
+      return response()->json(['message' => 404]);
      }
 
 }
