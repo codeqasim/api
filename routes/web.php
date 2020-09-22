@@ -14,7 +14,7 @@ $router->post(env("ADMIN_URL").'/settings/create',
 	'admin\AdminController@settings_create');
 $router->delete(env("ADMIN_URL").'/settings/del/{id}',
 	'admin\AdminController@delete');
-$router->post(env("ADMIN_URL").'/settings/update/{id}',
+$router->post(env("ADMIN_URL").'/settings/update',
 	'admin\AdminController@update');
 });
 

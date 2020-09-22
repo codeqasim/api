@@ -156,15 +156,13 @@ class AdminController extends Controller
     }
 
         public function update(Request $request) {
-        
-        // Find the data you want to update
-        $settings_id = Settings::find($request->id);
-        // Return error if not found
-        if (empty($settings_id)) {
-            return response()->json(['updated' => $settings_id == 1,'status'=>'200']);
-        }
+
+       $header_logo = $request->file('header_logo_img')->storeAs('public/setting_img','header_logo.jpg');
+       $footer_logo = $request->file('footer_logo_img')->storeAs('public/setting_img','footer_logo.jpg');
+       $favicon_img = $request->file('favicon_img')->storeAs('public/setting_img','favicon_img.jpg');
+
         // Update the Settings
-         Settings::where('id', $settings_id->id)->update([
+         $settings_id = Settings::where('id',request('id'))->update([
         'site_title'=>request('site_title'),
         'home_title'=>request('home_title'),
         'site_url'=>request('site_url'),
@@ -177,9 +175,9 @@ class AdminController extends Controller
         'seo_status'=>request('seo_status'),
         'keywords'=>request('keywords'),
         'meta_description'=>request('meta_description'),
-        'header_logo_img'=>request('header_logo_img'),
-        'footer_logo_img'=>request('footer_logo_img'),
-        'favicon_img'=>request('favicon_img'),
+        'header_logo_img'=>$header_logo,
+        'footer_logo_img'=>$footer_logo,
+        'favicon_img'=>$favicon_img,
         'currency_sign'=>request('currency_sign'),
         'currency_code'=>request('currency_code'),
         'google'=>request('google'),
@@ -218,8 +216,11 @@ class AdminController extends Controller
         'restrict_website'=>request('restrict_website'),
         'mobile_redirect_url'=>request('mobile_redirect_url')
         ]);
-        return response()->json(['updated' => 'true','status'=>'200']);
-    } 
+         if ($settings_id) {
+            return response()->json(['updated' => $settings_id == 1,'status'=>'200']);
+         }
+        return response()->json(['updated' => 'false','status'=>'200']);
+        } 
 
             //show all record
         public function modules()
