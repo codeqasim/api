@@ -8,6 +8,7 @@ use App\Model\admin\Modules;
 use App\Model\admin\Modules_integrations;
 use App\Model\globle\Currencies;
 use DB;
+use URL;
 class AdminController extends Controller
 {
     /**
@@ -157,10 +158,33 @@ class AdminController extends Controller
 
         public function update(Request $request) {
 
-       $header_logo = $request->file('header_logo_img')->storeAs('public/setting_img','header_logo.jpg');
-       $footer_logo = $request->file('footer_logo_img')->storeAs('public/setting_img','footer_logo.jpg');
-       $favicon_img = $request->file('favicon_img')->storeAs('public/setting_img','favicon_img.jpg');
+        // $head_image = $request->file('header_logo_img');
+        // $head_logo = time().'.'.$head_image->getClientOriginalExtension();
+        // $head_logo_path = URL::asset('storage/app/public/setting_img/'.$head_logo);
 
+        // $footer_image = $request->file('footer_logo_img');
+        // $footer_logo = time().'.'.$footer_image->getClientOriginalExtension();
+        // $footer_logo_path = URL::asset('storage/app/public/setting_img/'.$footer_logo);
+
+        // $favicon_img = $request->file('favicon_img');
+        // $favicon = time().'.'.$favicon_img->getClientOriginalExtension();
+        // $favicon_path = URL::asset('storage/app/public/setting_img/'.$favicon);
+
+            // return $request->file('header_logo_img');
+            if (empty($request->file('header_logo_img'))) {
+            $head_logo_path = $request->post('header_logo_img');
+            }else{
+            $head_logo_path = $request->file('header_logo_img')->storeAs('public/setting_img','header_logo.jpg');
+            }if (empty($request->file('footer_logo_img'))) {
+            $footer_logo_path = $request->post('footer_logo_img');
+            }else{
+            $footer_logo_path = $request->file('footer_logo_img')->storeAs('public/setting_img','footer_logo.jpg');
+            }if (empty($request->file('favicon_img'))) {
+            $favicon_path = $request->post('favicon_img');
+            }else{
+            $favicon_path = $request->file('favicon_img')->storeAs('public/setting_img','favicon_img.jpg');
+            }
+       
         // Update the Settings
          $settings_id = Settings::where('id',request('id'))->update([
         'site_title'=>request('site_title'),
@@ -175,9 +199,9 @@ class AdminController extends Controller
         'seo_status'=>request('seo_status'),
         'keywords'=>request('keywords'),
         'meta_description'=>request('meta_description'),
-        'header_logo_img'=>$header_logo,
-        'footer_logo_img'=>$footer_logo,
-        'favicon_img'=>$favicon_img,
+        'header_logo_img'=>$head_logo_path,
+        'footer_logo_img'=>$footer_logo_path,
+        'favicon_img'=>$favicon_path,
         'currency_sign'=>request('currency_sign'),
         'currency_code'=>request('currency_code'),
         'google'=>request('google'),
