@@ -222,7 +222,7 @@ class AdminController extends Controller
         'keywords'=>$keywords,
         'meta_description'=>request('meta_description'),
         'header_logo_img'=>$head_logo_name,
-        'footer_logo_img'=>$footer_logo_name,
+        'footer_logo_img'=>'$footer_logo_name',
         'favicon_img'=>$favicon_logo_name,
         'currency_sign'=>request('currency_sign'),
         'currency_code'=>request('currency_code'),
