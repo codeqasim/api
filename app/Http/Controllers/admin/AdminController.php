@@ -182,16 +182,17 @@ class AdminController extends Controller
 /*footer_logo_img*/
             if (empty($request->footer_logo_img)) {
             $footer_logo_name = $request->post('footer_logo_img');
-            }else{
-      $footer_explodeed = explode(',', $request->footer_logo_img);
-      $footer_decoded = base64_decode($footer_explodeed[1]);
-      if (str_contains($footer_explodeed[0],'jpeg'))
-        {$footer_exension = 'jpg';}else{$footer_exension = 'png';}
-      $footer_logo_name = 'footer_logo.'.$footer_exension;
-      if($footer_logo_name!=""){
-        // storing image in storage/app/public Folder
-        \Storage::disk('public')->put($footer_logo_name,$footer_decoded);
-      }}
+            }
+            // else{
+      // $footer_explodeed = explode(',', $request->footer_logo_img);
+      // $footer_decoded = base64_decode($footer_explodeed[1]);
+      // if (str_contains($footer_explodeed[0],'jpeg'))
+      //   {$footer_exension = 'jpg';}else{$footer_exension = 'png';}
+      // $footer_logo_name = 'footer_logo.'.$footer_exension;
+      // if($footer_logo_name!=""){
+      //   // storing image in storage/app/public Folder
+      //   \Storage::disk('public')->put($footer_logo_name,$footer_decoded);
+      // }}
 /*favicon_img*/
             if (empty($request->favicon_img)) {
             $favicon_logo_name = $request->post('favicon_img');
