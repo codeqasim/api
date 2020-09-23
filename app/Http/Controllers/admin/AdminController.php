@@ -178,17 +178,93 @@ class AdminController extends Controller
         // $favicon = time().'.'.$favicon_img->getClientOriginalExtension();
         // $favicon_path = URL::asset('storage/app/public/setting_img/'.$favicon);
 
-      $file_data = $request->file('header_logo_img');
+      //             $file_data = $request->input('uploaded_image');
+      // //generating unique file name;
+      // $file_name = 'image_'.time().'.png';
+      // //@list($type, $file_data) = explode(';', $file_data);
+      // //@list(, $file_data)      = explode(',', $file_data);
+      // if($file_data!=""){
+      //   // storing image in storage/app/public Folder
+      //   \Storage::disk('public')->put($file_name,base64_decode($file_data));     
+      // }
 
-      // return $file_data;
-      //generating unique file name;
-      $file_name = 'image_'.time().'.png';
-      //@list($type, $file_data) = explode(';', $file_data);
-      //@list(, $file_data)      = explode(',', $file_data);
-      if($file_data!=""){
-        // storing image in storage/app/public Folder
-       return base64_decode($file_data);     
-      }
+
+            $imgpath = $request->header_logo_img;
+            return $imgpath;
+
+            if (empty($request->file('header_logo_img'))) {
+            $head_logo_path = $request->post('header_logo_img');
+            }else{
+            $head_logo_path = $request->file('header_logo_img')->storeAs('public/setting_img','header_logo.jpg');
+            }if (empty($request->file('footer_logo_img'))) {
+            $footer_logo_path = $request->post('footer_logo_img');
+            }else{
+            $footer_logo_path = $request->file('footer_logo_img')->storeAs('public/setting_img','footer_logo.jpg');
+            }if (empty($request->file('favicon_img'))) {
+            $favicon_path = $request->post('favicon_img');
+            }else{
+            $favicon_path = $request->file('favicon_img')->storeAs('public/setting_img','favicon_img.jpg');
+            }
+        $keywords =  $request->post('keywords');
+        // Update the Settings
+         $settings_id = Settings::where('id',request('id'))->update([
+        'site_title'=>request('site_title'),
+        'home_title'=>request('home_title'),
+        'site_url'=>request('site_url'),
+        'ssl_url'=>request('ssl_url'),
+        'tag_line'=>request('tag_line'),
+        'site_name'=>request('site_name'),
+        'address'=>request('address'),
+        'phone'=>request('phone'),
+        'copyright'=>request('copyright'),
+        'seo_status'=>request('seo_status'),
+        'keywords'=>$keywords,
+        'meta_description'=>request('meta_description'),
+        'header_logo_img'=>$head_logo_path,
+        'footer_logo_img'=>$footer_logo_path,
+        'favicon_img'=>$favicon_path,
+        'currency_sign'=>request('currency_sign'),
+        'currency_code'=>request('currency_code'),
+        'google'=>request('google'),
+        'mapApi'=>request('mapApi'),
+        'javascript'=>request('javascript'),
+        'reviews'=>request('reviews'),
+        'gallery_approve'=>request('gallery_approve'),
+        'video_uploads'=>request('video_uploads'),
+        'default_lang'=>request('default_lang'),
+        'multi_lang'=>request('multi_lang'),
+        'date_f'=>request('date_f'),
+        'date_f_js'=>request('date_f_js'),
+        'license_key'=>request('license_key'),
+        'local_key'=>request('local_key'),
+        'secret_key'=>request('secret_key'),
+        'default_city'=>request('default_city'),
+        'default_theme'=>request('default_theme'),
+        'offline_message'=>request('offline_message'),
+        'site_offline'=>request('site_offline'),
+        'multi_curr'=>request('multi_curr'),
+        'booking_expiry'=>request('booking_expiry'),
+        'booking_cancellation'=>request('booking_cancellation'),
+        'coupon_code_length'=>request('coupon_code_length'),
+        'coupon_code_type'=>request('coupon_code_type'),
+        'secure_admin_key'=>request('secure_admin_key'),
+        'secure_admin_status'=>request('secure_admin_status'),
+        'secure_supplier_key'=>request('secure_supplier_key'),
+        'secure_supplier_status'=>request('secure_supplier_status'),
+        'allow_registration'=>request('allow_registration'),
+        'user_reg_approval'=>request('user_reg_approval'),
+    'allow_supplier_registration'=>request('allow_supplier_registration'),
+        'default_gateway'=>request('default_gateway'),
+        'searchbox'=>request('searchbox'),
+        'rss'=>request('rss'),
+        'updates_check'=>request('updates_check'),
+        'restrict_website'=>request('restrict_website'),
+        'mobile_redirect_url'=>request('mobile_redirect_url')
+        ]);
+         if ($settings_id) {
+            return response()->json(['updated' => $settings_id == 1,'status'=>'200']);
+         }
+        return response()->json(['updated' => 'false','status'=>'200']);
         } 
 
             //show all record
