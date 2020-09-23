@@ -166,45 +166,45 @@ class AdminController extends Controller
 
         public function update(Request $request) {
 
-        // $head_image = $request->file('header_logo_img');
-        // $head_logo = time().'.'.$head_image->getClientOriginalExtension();
-        // $head_logo_path = URL::asset('storage/app/public/setting_img/'.$head_logo);
-
-        // $footer_image = $request->file('footer_logo_img');
-        // $footer_logo = time().'.'.$footer_image->getClientOriginalExtension();
-        // $footer_logo_path = URL::asset('storage/app/public/setting_img/'.$footer_logo);
-
-        // $favicon_img = $request->file('favicon_img');
-        // $favicon = time().'.'.$favicon_img->getClientOriginalExtension();
-        // $favicon_path = URL::asset('storage/app/public/setting_img/'.$favicon);
-
-      //             $file_data = $request->input('uploaded_image');
-      // //generating unique file name;
-      // $file_name = 'image_'.time().'.png';
-      // //@list($type, $file_data) = explode(';', $file_data);
-      // //@list(, $file_data)      = explode(',', $file_data);
-      // if($file_data!=""){
-      //   // storing image in storage/app/public Folder
-      //   \Storage::disk('public')->put($file_name,base64_decode($file_data));     
-      // }
-
-
-            $imgpath = $request->header_logo_img;
-            return $imgpath;
-
-            if (empty($request->file('header_logo_img'))) {
-            $head_logo_path = $request->post('header_logo_img');
+/*header_logo_img*/
+            if (empty($request->header_logo_img)) {
+            $head_logo_name = $request->post('header_logo_img');
             }else{
-            $head_logo_path = $request->file('header_logo_img')->storeAs('public/setting_img','header_logo.jpg');
-            }if (empty($request->file('footer_logo_img'))) {
-            $footer_logo_path = $request->post('footer_logo_img');
+      $head_explodeed = explode(',', $request->header_logo_img);
+      $head_decoded = base64_decode($head_explodeed[1]);
+      if (str_contains($head_explodeed[0],'jpeg'))
+        {$head_exension = 'jpg';}else{$head_exension = 'png';}
+      $head_logo_name = 'header_logo.'.$head_exension;
+      if($head_logo_name!=""){
+        // storing image in storage/app/public Folder
+        \Storage::disk('public')->put($head_logo_name,$head_decoded);
+      }}
+/*footer_logo_img*/
+            if (empty($request->footer_logo_img)) {
+            $footer_logo_name = $request->post('footer_logo_img');
             }else{
-            $footer_logo_path = $request->file('footer_logo_img')->storeAs('public/setting_img','footer_logo.jpg');
-            }if (empty($request->file('favicon_img'))) {
-            $favicon_path = $request->post('favicon_img');
+      $footer_explodeed = explode(',', $request->footer_logo_img);
+      $footer_decoded = base64_decode($footer_explodeed[1]);
+      if (str_contains($footer_explodeed[0],'jpeg'))
+        {$footer_exension = 'jpg';}else{$footer_exension = 'png';}
+      $footer_logo_name = 'footer_logo.'.$footer_exension;
+      if($footer_logo_name!=""){
+        // storing image in storage/app/public Folder
+        \Storage::disk('public')->put($footer_logo_name,$footer_decoded);
+      }}
+/*favicon_img*/
+            if (empty($request->favicon_img)) {
+            $favicon_logo_name = $request->post('favicon_img');
             }else{
-            $favicon_path = $request->file('favicon_img')->storeAs('public/setting_img','favicon_img.jpg');
-            }
+      $favicon_explodeed = explode(',', $request->favicon_img);
+      $favicon_decoded = base64_decode($favicon_explodeed[1]);
+      if (str_contains($favicon_explodeed[0],'jpeg'))
+        {$favicon_exension = 'jpg';}else{$favicon_exension = 'png';}
+      $favicon_logo_name = 'favicon_logo.'.$favicon_exension;
+      if($favicon_logo_name!=""){
+        // storing image in storage/app/public Folder
+        \Storage::disk('public')->put($favicon_logo_name,$favicon_decoded);
+      }}
         $keywords =  $request->post('keywords');
         // Update the Settings
          $settings_id = Settings::where('id',request('id'))->update([
@@ -220,9 +220,9 @@ class AdminController extends Controller
         'seo_status'=>request('seo_status'),
         'keywords'=>$keywords,
         'meta_description'=>request('meta_description'),
-        'header_logo_img'=>$head_logo_path,
-        'footer_logo_img'=>$footer_logo_path,
-        'favicon_img'=>$favicon_path,
+        'header_logo_img'=>$head_logo_name,
+        'footer_logo_img'=>$footer_logo_name,
+        'favicon_img'=>$favicon_logo_name,
         'currency_sign'=>request('currency_sign'),
         'currency_code'=>request('currency_code'),
         'google'=>request('google'),
