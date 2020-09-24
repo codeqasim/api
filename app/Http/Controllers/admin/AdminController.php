@@ -24,14 +24,6 @@ class AdminController extends Controller
         public function settings()
     {
         return  Settings::get();
-
-        // $return = Settings::get();
-
-        // foreach ($return as $key => $value) {
-        //     echo $value->keywords;
-        // }
-        // // var_dump ($return);
-        // die();
     }
         //show only one record using id
         public function settings_view(Request $request) {
@@ -167,46 +159,59 @@ class AdminController extends Controller
         public function update(Request $request) {
 
 /*header_logo_img*/
-            if (empty($request->header_logo_img)) {
-            $head_logo_name = $request->post('header_logo_img');
-            }else{
-      $head_explodeed = explode(',', $request->header_logo_img);
-      $head_decoded = base64_decode($head_explodeed[1]);
-      if (str_contains($head_explodeed[0],'jpeg'))
-        {$head_exension = 'jpg';}else{$head_exension = 'png';}
-      $head_logo_name = 'header_logo.'.$head_exension;
-      if($head_logo_name!=""){
-        // storing image in storage/app/public Folder
-        \Storage::disk('public')->put($head_logo_name,$head_decoded);
-      }}
-/*footer_logo_img*/
-            if (empty($request->footer_logo_img)) {
-            $footer_logo_name = $request->post('footer_logo_img');
+            $head_explodeed = explode(',', $request->header_logo_img);
+            $head_words = explode(';', $head_explodeed[0]);
+            $head_base64 = array_pop($head_words);
+            if ($head_base64 == 'base64') {
+                $head_decoded = base64_decode($head_explodeed[1]);
+                if (str_contains($head_explodeed[0],'jpeg'))
+                {$head_exension = 'jpg';}else{$head_exension = 'png';}
+                $head_logo_name = 'header_logo.'.$head_exension;
+                if($head_logo_name!=""){
+                // storing image in storage/app/public Folder
+                \Storage::disk('public')->put($head_logo_name,$head_decoded);
+                }
+            } else {
+                $head_logo_name = $request->header_logo_img;
             }
-            // else{
-      // $footer_explodeed = explode(',', $request->footer_logo_img);
-      // $footer_decoded = base64_decode($footer_explodeed[1]);
-      // if (str_contains($footer_explodeed[0],'jpeg'))
-      //   {$footer_exension = 'jpg';}else{$footer_exension = 'png';}
-      // $footer_logo_name = 'footer_logo.'.$footer_exension;
-      // if($footer_logo_name!=""){
-      //   // storing image in storage/app/public Folder
-      //   \Storage::disk('public')->put($footer_logo_name,$footer_decoded);
-      // }}
+
+/*footer_logo_img*/
+            $footer_explodeed = explode(',', $request->footer_logo_img);
+            $footer_words = explode(';', $footer_explodeed[0]);
+            $footer_base64 = array_pop($footer_words);
+            if ($footer_base64 == 'base64') {
+                $footer_decoded = base64_decode($footer_explodeed[1]);
+                if (str_contains($footer_explodeed[0],'jpeg'))
+                {$footer_exension = 'jpg';}else{$footer_exension = 'png';}
+                $footer_logo_name = 'footer_logo.'.$footer_exension;
+                if($footer_logo_name!=""){
+                // storing image in storage/app/public Folder
+                \Storage::disk('public')->put($footer_logo_name,$footer_decoded);
+                }
+            } else {
+                $footer_logo_name = $request->footer_logo_img;
+            }
+
+
 /*favicon_img*/
-            if (empty($request->favicon_img)) {
-            $favicon_logo_name = $request->post('favicon_img');
-            }else{
-      $favicon_explodeed = explode(',', $request->favicon_img);
-      $favicon_decoded = base64_decode($favicon_explodeed[1]);
-      if (str_contains($favicon_explodeed[0],'jpeg'))
-        {$favicon_exension = 'jpg';}else{$favicon_exension = 'png';}
-      $favicon_logo_name = 'favicon_logo.'.$favicon_exension;
-      if($favicon_logo_name!=""){
-        // storing image in storage/app/public Folder
-        \Storage::disk('public')->put($favicon_logo_name,$favicon_decoded);
-      }}
-        $keywords =  $request->post('keywords');
+            $favicon_explodeed = explode(',', $request->favicon_img);
+            $favicon_words = explode(';', $favicon_explodeed[0]);
+
+            $favicon_base64 = array_pop($favicon_words);
+            if ($favicon_base64 == 'base64') {
+
+                $favicon_decoded = base64_decode($favicon_explodeed[1]);
+                if (str_contains($favicon_explodeed[0],'jpeg'))
+                {$favicon_exension = 'jpg';}else{$favicon_exension = 'png';}
+                $favicon_logo_name = 'favicon_logo.'.$favicon_exension;
+                if($favicon_logo_name!=""){
+                // storing image in storage/app/public Folder
+                \Storage::disk('public')->put($favicon_logo_name,$favicon_decoded);
+                }
+            } else {
+                $favicon_logo_name = $request->favicon_img;
+            }
+
         // Update the Settings
          $settings_id = Settings::where('id',request('id'))->update([
         'site_title'=>request('site_title'),
@@ -219,10 +224,10 @@ class AdminController extends Controller
         'phone'=>request('phone'),
         'copyright'=>request('copyright'),
         'seo_status'=>request('seo_status'),
-        'keywords'=>$keywords,
+        'keywords'=>request('keywords'),
         'meta_description'=>request('meta_description'),
         'header_logo_img'=>$head_logo_name,
-        'footer_logo_img'=>'$footer_logo_name',
+        'footer_logo_img'=>$footer_logo_name,
         'favicon_img'=>$favicon_logo_name,
         'currency_sign'=>request('currency_sign'),
         'currency_code'=>request('currency_code'),
