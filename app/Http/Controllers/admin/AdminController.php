@@ -414,6 +414,7 @@ class AdminController extends Controller
     //Add new Currencies
         public function add_currencies(Request $request) {
         $this->validate($request, [
+        "country_id"=> "required",
         "name"=> "required",
         "code"=> "required",
         "rate"=> "required",
@@ -430,6 +431,7 @@ class AdminController extends Controller
     //update Currencies record
         public function update_currencies(Request $request) {
         $this->validate($request, [
+        "id"=> "required",
         "name"=> "required",
         "code"=> "required",
         "rate"=> "required",

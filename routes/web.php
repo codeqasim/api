@@ -133,9 +133,9 @@ $router->post(env("ADMIN_URL").'/currencies/view',
 	'admin\AdminController@view_currencies');
 $router->post(env("ADMIN_URL").'/currencies/create',
 	'admin\AdminController@add_currencies');
-$router->delete(env("ADMIN_URL").'/currencies/del/{id}',
+$router->post(env("ADMIN_URL").'/currencies/del',
 	'admin\AdminController@delete_currencies');
-$router->post(env("ADMIN_URL").'/currencies/update/{id}',
+$router->post(env("ADMIN_URL").'/currencies/update',
 	'admin\AdminController@update_currencies');
 });
 

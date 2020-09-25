@@ -12,6 +12,7 @@ class Currencies extends Model
      * @var array
      */
     protected $fillable = [
+        "country_id",
         "name",
         "symbol",
         "code",
@@ -32,6 +33,7 @@ class Currencies extends Model
 
     public static function add_currencies($request){
         Currencies::create([
+        "country_id"=>$request->country_id,
         "name"=>$request->name,
         "symbol"=>$request->symbol,
         "code"=>$request->code,
@@ -54,6 +56,7 @@ class Currencies extends Model
             return response()->json(['updated' => $currencies_id == 1,'status'=>'200']);
         }
         Currencies::where('id', $currencies_id->id)->update([
+        "country_id"=>$request->country_id,
         "name"=>$request->name,
         "symbol"=>$request->symbol,
         "code"=>$request->code,
