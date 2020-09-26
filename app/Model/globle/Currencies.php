@@ -3,6 +3,7 @@
 namespace App\Model\globle;
 
 use Illuminate\Database\Eloquent\Model;
+use DB;
 class Currencies extends Model
 {
     public $table = "currencies";
@@ -70,14 +71,15 @@ class Currencies extends Model
     return response()->json(['updated' => 'true','status'=>'200']);
     }
 
-//delete_mod_integrat
+//delete_currencies
     public static function delete_currencies($request) {
-        $currencies_id = Currencies::find($request->id);
-        if (!empty($currencies_id)) {
-           $currencies_id->delete();
+        $ids= explode(",", $request->ids);
+        $currencies_id = Currencies::find($ids);
+        if (count($currencies_id) != 0) {
+        DB::table("currencies")->whereIn('id',$currencies_id)->delete();
        return response()->json(['deleted' => 'true','status'=>'200']);
         }else{
-        return response()->json(['deleted' => $currencies_id == 1,'status'=>'200']);
+        return response()->json(['deleted' => 'false','status'=>'200']);
         }
     }
     /**
