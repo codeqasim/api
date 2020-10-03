@@ -71,17 +71,20 @@ class Currencies extends Model
     return response()->json(['updated' => 'true','status'=>'200']);
     }
 
-//delete_currencies
+    //delete_currencies
     public static function delete_currencies($request) {
-        $ids= explode(",", $request->ids);
-        $currencies_id = Currencies::find($ids);
+
+        $json = $request->ids;
+        $newarray = json_decode($json);
+        $currencies_id = Currencies::find($newarray);
         if (count($currencies_id) != 0) {
-        DB::table("currencies")->whereIn('id',$currencies_id)->delete();
+        DB::table("currencies")->whereIn('id',$newarray)->delete();
        return response()->json(['deleted' => 'true','status'=>'200']);
         }else{
         return response()->json(['deleted' => 'false','status'=>'200']);
         }
     }
+
     /**
      * The attributes excluded from the model's JSON form.
      *

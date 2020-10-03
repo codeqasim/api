@@ -23,10 +23,12 @@ $app = new Laravel\Lumen\Application(
     dirname(__DIR__)
 );
 
- $app->withFacades();
+$app->withFacades();
 
 $app->withEloquent();
-// $app->configure('swagger-lume');
+
+$app->configure('swagger-lume'); 
+// $app->register(\SwaggerLume\ServiceProvider::class);
 /*
 |--------------------------------------------------------------------------
 | Register Container Bindings
