@@ -7,6 +7,7 @@ use App\Model\admin\Settings;
 use App\Model\admin\Modules;
 use App\Model\admin\Modules_integrations;
 use App\Model\globle\Currencies;
+use App\Model\globle\Countries;
 use DB;
 use URL;
 class AdminController extends Controller
@@ -437,7 +438,7 @@ class AdminController extends Controller
         "rate"=> "required",
         "decimals"=> "required",
         "placement"=> "required",
-        "order"=> "required",
+        "order"=> "required", 
         "default"=> "required",
         "active"=> "required"
          ]);
@@ -449,5 +450,11 @@ class AdminController extends Controller
     public function delete_currencies(Request $request)
     {
         return Currencies::delete_currencies($request);
+    }
+
+                //show all countries record
+        public function countries()
+    {
+        return Countries::all_countries();
     }
 }

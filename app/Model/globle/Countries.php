@@ -1,6 +1,6 @@
-<?php
+<?php 
 
-namespace App\Model;
+namespace App\Model\globle;
 use Illuminate\Database\Eloquent\Model;
 
 class Countries extends Model

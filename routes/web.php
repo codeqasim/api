@@ -166,7 +166,7 @@ $router->post(env("ADMIN_URL").'/languages_trans/update/{id}',
 //countries route
 $router->group(['middleware'=>'auth'], function ($router) {
 $router->post(env("ADMIN_URL").'/countries',
-	'CountriesController@view');
+	'admin\AdminController@countries');
 });
 
 //==========Front==========
