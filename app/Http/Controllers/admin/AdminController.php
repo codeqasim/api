@@ -417,11 +417,12 @@ class AdminController extends Controller
         $this->validate($request, [
         "country_id"=> "required",
         "name"=> "required",
+        "symbol"=> "required",
         "code"=> "required",
         "rate"=> "required",
-        "decimals"=> "required",
-        "placement"=> "required",
-        "order"=> "required",
+        // "decimals"=> "required",
+        // "placement"=> "required",
+        // "order"=> "required",
         "default"=> "required",
         "active"=> "required"
          ]);
@@ -433,12 +434,14 @@ class AdminController extends Controller
         public function update_currencies(Request $request) {
         $this->validate($request, [
         "id"=> "required",
+        "country_id"=> "required",
         "name"=> "required",
+        "symbol"=> "required",
         "code"=> "required",
         "rate"=> "required",
-        "decimals"=> "required",
-        "placement"=> "required",
-        "order"=> "required", 
+        // "decimals"=> "required",
+        // "placement"=> "required",
+        // "order"=> "required", 
         "default"=> "required",
         "active"=> "required"
          ]);
