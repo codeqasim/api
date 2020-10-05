@@ -423,7 +423,7 @@ class AdminController extends Controller
         // "decimals"=> "required",
         // "placement"=> "required",
         // "order"=> "required",
-        "default"=> "required",
+        // "default"=> "required",
         "active"=> "required"
          ]);
         return Currencies::add_currencies($request);
@@ -442,7 +442,7 @@ class AdminController extends Controller
         // "decimals"=> "required",
         // "placement"=> "required",
         // "order"=> "required", 
-        "default"=> "required",
+        // "default"=> "required",
         "active"=> "required"
          ]);
         return Currencies::update_currencies($request);
